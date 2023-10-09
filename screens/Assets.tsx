@@ -16,14 +16,23 @@ import Colors from '../constants/Colors';
 import DeviceInfo from 'react-native-device-info';
 import AssetPicker from '../components/AssetPicker';
 import Modal from '../components/Modal';
+import { Asset } from '../types/Asset';
+import { selectShowModal, showModal } from '../redux/modalReducer';
+import { useSelector, useDispatch } from 'react-redux';
 
 export const fontSize = 16;
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
+const openModal = useSelector(selectShowModal);
 
 const[uniqueId, setUniqueId] = useState();
+const [refreshing, setRefreshing] = useState(false);
+const [isEditing, setIsEditing] = useState(false);
+const [assets, setAssets] = useState<Array<Asset>>();
 const [assetTypeId, setAssetTypeId] = useState('');
+const [editingAssetId, setEditingAssetId] = useState('');
+const dispatch = useDispatch();
 
 useEffect(() => {
 
@@ -63,23 +72,23 @@ useEffect(() => {
       /> */}
     </SafeAreaView>
     <Modal
-        show={false}
-        // isEditMode={isEditing}
-        // onClose={() => {
-        //   dispatch(showModal(false));
-        //   setIsEditing(false);
-        // }
-        // }
-        // onSave={(assetTypeId: number, amount: number) => {
-        //   if (assetTypeId) {
-        //     addAsset(assetTypeId, amount);
-        //   }
-        //   else {
-        //     updateAsset(editingAssetId, amount);
-        //   }
+        show={openModal}
+        isEditMode={isEditing}
+        onClose={() => {
+          dispatch(showModal(false));
+          setIsEditing(false);
+        }
+        }
+        onSave={(assetTypeId: number, amount: number) => {
+          if (assetTypeId) {
+            // addAsset(assetTypeId, amount);
+          }
+          else {
+            // updateAsset(editingAssetId, amount);
+          }
         //   onRefresh();
-        //   setIsEditing(false);
-        // }}
+          setIsEditing(false);
+        }}
       />
   </>
   );
