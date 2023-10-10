@@ -68,9 +68,9 @@ const ReduxProvider = () => {
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingTop: 10,
-    height: 70
+    height: 80
   }
 });
 

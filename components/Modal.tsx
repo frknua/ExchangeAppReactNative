@@ -21,7 +21,8 @@ export default function Modal(props: any) {
     }
     return (
         <Portal>
-            <Modalize ref={modalizeRef} onClose={() => props.onClose()} modalStyle={{ backgroundColor: "#e0e0e0", marginTop: 400 }}>
+            <Modalize ref={modalizeRef} onClose={() => props.onClose()} modalStyle={{ backgroundColor: "#e0e0e0", marginTop: 400 }}
+                avoidKeyboardLikeIOS={true}>
                 <View style={{ display: "flex", flexDirection: "column", margin: 15 }}>
                     <TextInput
                         style={styles.input}
