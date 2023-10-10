@@ -44,7 +44,7 @@ export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
 const openModal = useSelector(selectShowModal);
 
-const[uniqueId, setUniqueId] = useState();
+const[uniqueId, setUniqueId] = useState("");
 const [refreshing, setRefreshing] = useState(false);
 const [isEditing, setIsEditing] = useState(false);
 const [assets, setAssets] = useState<Array<Asset>>();
@@ -54,11 +54,12 @@ const dispatch = useDispatch();
 
 useEffect(() => {
   const fetchData = async () => {
-    let assets = await getAssets();
-    setAssets(assets);
-    DeviceInfo.getUniqueId().then((uniqueId) => {
-      console.log("uniqueId",uniqueId);
+    DeviceInfo.getUniqueId().then((id) => {
+      console.log("uniqueId", id);
+        setUniqueId(id);
       });
+    let assets = await getAssets(uniqueId);
+    setAssets(assets);
   }
   fetchData();
 }, [refreshing]);
@@ -71,7 +72,7 @@ const handleDelete = (rowData: any, rowMap: any) => {
       { text: 'İptal', onPress: () => rowMap[rowData.item.ID].closeRow(), style: 'cancel' },
       {
         text: 'Tamam', onPress: () => {
-          deleteAsset(rowData.item.ID);
+          deleteAsset(uniqueId,rowData.item.ID);
           onRefresh();
         }
       },
@@ -129,14 +130,6 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
 };
 
   return (
-    // <View style={[
-    //     styles.container,
-    //     {
-    //       backgroundColor: isDarkMode ? Colors.dark.background : Colors.light.background,
-    //     },
-    //   ]}>
-    //   <Text style={styles.title}>Portföy</Text>
-    // </View>
     <>
     <SafeAreaView style={{flex: 1}}>
       <View style={{ margin: 10, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -165,10 +158,10 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         }
         onSave={(assetTypeId: number, amount: number) => {
           if (assetTypeId) {
-            addAsset(assetTypeId, amount);
+            addAsset(uniqueId, assetTypeId, amount);
           }
           else {
-            updateAsset(editingAssetId, amount);
+            updateAsset(uniqueId, editingAssetId, amount);
           }
           onRefresh();
           setIsEditing(false);

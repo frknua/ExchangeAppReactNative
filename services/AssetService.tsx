@@ -2,9 +2,9 @@ import { collection, doc, setDoc, db, getDoc, addDoc, getDocs, deleteDoc, update
 import { Asset } from "../types/asset";
 import { assetTypes } from "../constants/AssetTypes";
 
-const addAsset = async (assetTypeId: number, amount: number) => {
+const addAsset = async (userId:string, assetTypeId: number, amount: number) => {
     try {
-        const docRef = await addDoc(collection(db, "assets", "user1", "assetList"), {
+        const docRef = await addDoc(collection(db, "assets", userId, "assetList"), {
             assetTypeId: assetTypeId,
             amount: amount,
             symbol: assetTypes.filter(x => x.key == assetTypeId)[0].symbol,
@@ -16,9 +16,9 @@ const addAsset = async (assetTypeId: number, amount: number) => {
     }
 }
 
-const updateAsset = async (documentID: string, amount: number) => {
+const updateAsset = async (userId:string, documentId: string, amount: number) => {
     try {
-        await updateDoc(doc(db, "assets", "user1", "assetList", documentID), {
+        await updateDoc(doc(db, "assets", userId, "assetList", documentId), {
             amount: amount
         });
     } catch (e) {
@@ -26,9 +26,9 @@ const updateAsset = async (documentID: string, amount: number) => {
     }
 }
 
-const getAssets = async () => {
+const getAssets = async (userId:string) => {
     try {
-        const querySnapshot = await getDocs(query(collection(db, "assets", "user1", "assetList"), orderBy("creationDate")));
+        const querySnapshot = await getDocs(query(collection(db, "assets", userId, "assetList"), orderBy("creationDate")));
         let resultArray = Array<Asset>();
         querySnapshot.forEach((doc) => {
             let docData = doc.data();
@@ -48,9 +48,9 @@ const getAssets = async () => {
     }
 }
 
-const deleteAsset = async (documentID: string) => {
+const deleteAsset = async (userId:string, documentId: string) => {
     try {
-        await deleteDoc(doc(db, "assets", "user1", 'assetList', documentID));
+        await deleteDoc(doc(db, "assets", userId, 'assetList', documentId));
     } catch (e) {
         console.error("Error deleting document: ", e);
     }
