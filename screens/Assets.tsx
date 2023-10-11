@@ -53,16 +53,20 @@ const [editingAssetId, setEditingAssetId] = useState('');
 const dispatch = useDispatch();
 
 useEffect(() => {
-  const fetchData = async () => {
-    DeviceInfo.getUniqueId().then((id) => {
-      console.log("uniqueId", id);
-        setUniqueId(id);
-      });
-    let assets = await getAssets(uniqueId);
-    setAssets(assets);
-  }
-  fetchData();
+  getAssetData();
 }, [refreshing]);
+
+useEffect(() => {
+    getAssetData();
+}, []);
+
+const getAssetData = () => {
+  DeviceInfo.getUniqueId().then((id) => {
+      setUniqueId(id);
+      let assets = getAssets(id);
+      setAssets(assets);
+    });
+}
 
 const handleDelete = (rowData: any, rowMap: any) => {
   Alert.alert(

@@ -26,23 +26,31 @@ const updateAsset = async (userId:string, documentId: string, amount: number) =>
     }
 }
 
-const getAssets = async (userId:string) => {
+const getAssets = (userId:string) => {
     try {
-        const querySnapshot = await getDocs(query(collection(db, "assets", userId, "assetList"), orderBy("creationDate")));
         let resultArray = Array<Asset>();
-        querySnapshot.forEach((doc) => {
-            let docData = doc.data();
-            let asset = assetTypes.filter(x => x.key == docData.assetTypeId)[0];
-            resultArray.push({
-                ID: doc.id,
-                AssetTypeId: docData.assetTypeId,
-                Symbol: asset.symbol,
-                Name: asset.name,
-                Amount: docData.amount
+        getDocs(query(collection(db, "assets", userId, "assetList"), orderBy("creationDate")))
+        .then((querySnapshot) => {
+        if(!querySnapshot.empty){
+            querySnapshot.forEach((doc) => {
+                if(doc.exists())
+                {
+                    let docData = doc.data();
+                    let asset = assetTypes.filter(x => x.key == docData?.assetTypeId)[0];
+                    resultArray.push({
+                        ID: doc.id,
+                        AssetTypeId: docData.assetTypeId,
+                        Symbol: asset.symbol,
+                        Name: asset.name,
+                        Amount: docData.amount
+                    });
+                }
             });
-        });
+        }
         console.log("getAssets:", resultArray);
         return resultArray;
+    });
+    return resultArray;
     } catch (e) {
         console.error("Error getting document: ", e);
     }
