@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, db, getDoc, addDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, query, orderBy } from "../firebase/Config";
+import { collection, doc, setDoc, db, getDoc, addDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, query, orderBy, onSnapshot } from "../firebase/Config";
 import { Asset } from "../types/asset";
 import { assetTypes } from "../constants/AssetTypes";
 
@@ -64,4 +64,11 @@ const deleteAsset = async (userId:string, documentId: string) => {
     }
 }
 
-export { addAsset, updateAsset, deleteAsset, getAssets }
+const unsub = (callback:any) => onSnapshot(doc(db, "currencies", "current"), (doc) => {
+    if(doc.exists())
+    {
+        callback(doc.data());
+    }
+});
+
+export { addAsset, updateAsset, deleteAsset, getAssets, unsub }

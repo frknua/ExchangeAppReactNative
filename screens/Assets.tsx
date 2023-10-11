@@ -19,7 +19,7 @@ import Modal from '../components/Modal';
 import { Asset } from '../types/Asset';
 import { selectShowModal, showModal } from '../redux/modalReducer';
 import { useSelector, useDispatch } from 'react-redux';
-import { addAsset, getAssets, deleteAsset, updateAsset } from '../services/AssetService';
+import { addAsset, getAssets, deleteAsset, updateAsset, unsub } from '../services/AssetService';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
@@ -48,6 +48,7 @@ const[uniqueId, setUniqueId] = useState("");
 const [refreshing, setRefreshing] = useState(false);
 const [isEditing, setIsEditing] = useState(false);
 const [assets, setAssets] = useState<Array<Asset>>();
+const [currencies, setCurrencies] = useState();
 const [assetTypeId, setAssetTypeId] = useState('');
 const [editingAssetId, setEditingAssetId] = useState('');
 const dispatch = useDispatch();
@@ -56,9 +57,12 @@ useEffect(() => {
   getAssetData();
 }, [refreshing]);
 
-useEffect(() => {
-    getAssetData();
-}, []);
+// useEffect(() => {
+//     getAssetData();
+//     unsub((data: any) => {
+//       setCurrencies(data);
+//     });
+// }, []);
 
 const getAssetData = () => {
   DeviceInfo.getUniqueId().then((id) => {
