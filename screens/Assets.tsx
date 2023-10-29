@@ -85,51 +85,87 @@ const calculateTotal = () => {
   return;
   let totalAmount = 0;
   assets?.forEach(item => {
-    if(assetTypeId == item.AssetTypeId)
+    switch(item.AssetTypeId)
     {
-        totalAmount += item.Amount;
-    }
-    else{
-      switch(item.AssetTypeId)
-      {
+        case assetTypeIdEnum.TRY:
+            totalAmount += item.Amount;
+        break;
         case assetTypeIdEnum.USD:
             totalAmount += (item.Amount * currencies?.buyingUsd!);
+        break;
+        case assetTypeIdEnum.EUR:
+          totalAmount += (item.Amount * currencies?.buyingEur!);
+        break;
+        case assetTypeIdEnum.GBP:
+          totalAmount += (item.Amount * currencies?.buyingGbp!);
+        break;
+        case assetTypeIdEnum.CHF:
+          totalAmount += (item.Amount * currencies?.buyingChf!);
+        break;
+        case assetTypeIdEnum.CAD:
+          totalAmount += (item.Amount * currencies?.buyingCad!);
+        break;
+        case assetTypeIdEnum.AUD:
+          totalAmount += (item.Amount * currencies?.buyingAud!);
+        break;
+        case assetTypeIdEnum.GRAM:
+          totalAmount += (item.Amount * currencies?.buyingGram!);
+        break;
+        case assetTypeIdEnum.CEYREK:
+          totalAmount += (item.Amount * currencies?.buyingCeyrek!);
+        break;
+        case assetTypeIdEnum.YARIM:
+          totalAmount += (item.Amount * currencies?.buyingYarim!);
+        break;
+        case assetTypeIdEnum.TAM:
+          totalAmount += (item.Amount * currencies?.buyingTam!);
+        break;
+        case assetTypeIdEnum.CUMHURIYET:
+          totalAmount += (item.Amount * currencies?.buyingCumhuriyet!);
+        break;
+        default:
           break;
-          case assetTypeIdEnum.EUR:
-            totalAmount += (item.Amount * currencies?.buyingEur!);
-          break;
-          case assetTypeIdEnum.GBP:
-            totalAmount += (item.Amount * currencies?.buyingGbp!);
-          break;
-          case assetTypeIdEnum.CHF:
-            totalAmount += (item.Amount * currencies?.buyingChf!);
-          break;
-          case assetTypeIdEnum.CAD:
-            totalAmount += (item.Amount * currencies?.buyingCad!);
-          break;
-          case assetTypeIdEnum.AUD:
-            totalAmount += (item.Amount * currencies?.buyingAud!);
-          break;
-          case assetTypeIdEnum.GRAM:
-            totalAmount += (item.Amount * currencies?.buyingGram!);
-          break;
-          case assetTypeIdEnum.CEYREK:
-            totalAmount += (item.Amount * currencies?.buyingCeyrek!);
-          break;
-          case assetTypeIdEnum.YARIM:
-            totalAmount += (item.Amount * currencies?.buyingYarim!);
-          break;
-          case assetTypeIdEnum.TAM:
-            totalAmount += (item.Amount * currencies?.buyingTam!);
-          break;
-          case assetTypeIdEnum.CUMHURIYET:
-            totalAmount += (item.Amount * currencies?.buyingCumhuriyet!);
-          break;
-          default:
-            break;
-      }
     }
   });
+  if(assetTypeId != assetTypeIdEnum.TRY)
+  {
+      switch(assetTypeId)
+      {
+        case assetTypeIdEnum.USD:
+          totalAmount /= currencies?.buyingUsd!;
+        break;
+        case assetTypeIdEnum.EUR:
+          totalAmount /= currencies?.buyingEur!;
+        break;
+        case assetTypeIdEnum.GBP:
+          totalAmount /= currencies?.buyingGbp!;
+        break;
+        case assetTypeIdEnum.CHF:
+          totalAmount /= currencies?.buyingChf!;
+        break;
+        case assetTypeIdEnum.CAD:
+          totalAmount /= currencies?.buyingCad!;
+        break;
+        case assetTypeIdEnum.AUD:
+          totalAmount /= currencies?.buyingAud!;
+        break;
+        case assetTypeIdEnum.GRAM:
+          totalAmount /= currencies?.buyingGram!;
+        break;
+        case assetTypeIdEnum.CEYREK:
+          totalAmount /= currencies?.buyingCeyrek!;
+        break;
+        case assetTypeIdEnum.YARIM:
+          totalAmount /= currencies?.buyingYarim!;
+        break;
+        case assetTypeIdEnum.TAM:
+          totalAmount /= currencies?.buyingTam!;
+        break;
+        case assetTypeIdEnum.CUMHURIYET:
+          totalAmount /= currencies?.buyingCumhuriyet!;
+        break;
+      }
+  }
   setTotal(totalAmount);
 }
 
@@ -198,6 +234,11 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
   );
 };
 
+const amountFormat = (value:number) => {
+  let stringValue = value.toString();
+  let index = stringValue.indexOf(".");
+  return index != -1 ? stringValue.substring(0,index+3) : stringValue + ".00";
+}
   return (
     <>
     <SafeAreaView style={{flex: 1}}>
@@ -207,7 +248,7 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
           if(value)
           setAssetTypeId(value)
         }} />
-        <Text style={{ fontSize: fontSize }}>{total.toFixed(2)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+        <Text style={{ fontSize: fontSize }}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
       </View>
       <SwipeListView
       style={{paddingBottom:100}}
