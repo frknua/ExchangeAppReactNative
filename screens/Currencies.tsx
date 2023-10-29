@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, useColorScheme, View, Text } from 'react-native';
 import Colors from '../constants/Colors';
 import { unsub } from '../services/AssetService';
+import { Currency } from '../types/Currency';
 
 export default function Currencies() {
 const isDarkMode = useColorScheme() === 'dark';
-const [currencies, setCurrencies] = useState();
+const [currencies, setCurrencies] = useState<Currency>();
 
 useEffect(() => {
-  unsub((data: any) => {
+  unsub((data: Currency) => {
     console.log("Current data: ", data);
     setCurrencies(data);
   });
@@ -22,9 +23,9 @@ useEffect(() => {
         },
       ]}>
       <Text style={styles.title}>Kurlar</Text>
-      <Text style={styles.title}>try: {currencies?.try}</Text>
-      <Text style={styles.title}>eur: {currencies?.eur}</Text>
-      <Text style={styles.title}>usd: {currencies?.usd}</Text>
+      <Text style={styles.title}>eur: {currencies?.buyingEur}</Text>
+      <Text style={styles.title}>usd: {currencies?.buyingUsd}</Text>
+      <Text style={styles.title}>gram: {currencies?.buyingGram}</Text>
     </View>
   );
 }

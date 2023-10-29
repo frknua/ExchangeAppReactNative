@@ -1,27 +1,76 @@
+export const assetTypeIdEnum = {
+    TRY: 1,
+    USD: 2,
+    EUR: 3,
+    GBP: 4,
+    CHF: 5,
+    CAD: 6,
+    AUD: 7,
+    GRAM: 8,
+    CEYREK: 9,
+    YARIM: 10,
+    TAM: 11,
+    CUMHURIYET: 12
+}
 export const assetTypes = [
     {
-        key: 1,
+        key: assetTypeIdEnum.TRY,
         name: "Türk Lirası",
         symbol: "TRY"
     },
     {
-        key: 2,
+        key: assetTypeIdEnum.USD,
         name: "Amerikan Doları",
         symbol: "USD"
     },
     {
-        key: 3,
+        key: assetTypeIdEnum.EUR,
         name: "Euro",
         symbol: "EUR"
     },
     {
-        key: 4,
+        key: assetTypeIdEnum.GBP,
         name: "Sterlin",
         symbol: "GBP"
     },
     {
-        key: 5,
+        key: assetTypeIdEnum.CHF,
+        name: "İsviçre Frangı",
+        symbol: "CHF"
+    },
+    {
+        key: assetTypeIdEnum.CAD,
+        name: "Kanada Doları",
+        symbol: "CAD"
+    },
+    {
+        key: assetTypeIdEnum.AUD,
+        name: "Avustralya Doları",
+        symbol: "AUD"
+    },
+    {
+        key: assetTypeIdEnum.GRAM,
         name: "Gram Altın",
-        symbol: "XAU"
+        symbol: ""
+    },
+    {
+        key: assetTypeIdEnum.CEYREK,
+        name: "Çeyrek Altın",
+        symbol: ""
+    },
+    {
+        key: assetTypeIdEnum.YARIM,
+        name: "Yarım Altın",
+        symbol: ""
+    },
+    {
+        key: assetTypeIdEnum.TAM,
+        name: "Tam Altın",
+        symbol: ""
+    },
+    {
+        key: assetTypeIdEnum.CUMHURIYET,
+        name: "Cumhuriyet Altını",
+        symbol: ""
     }
 ];

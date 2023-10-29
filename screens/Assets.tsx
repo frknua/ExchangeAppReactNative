@@ -22,6 +22,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addAsset, getAssets, deleteAsset, updateAsset, unsub } from '../services/AssetService';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { assetTypes, assetTypeIdEnum } from '../constants/AssetTypes';
+import { Currency } from '../types/Currency';
 
 export const backButtonWidth = 75;
 export const openWidth = backButtonWidth * 2;
@@ -48,28 +50,87 @@ const[uniqueId, setUniqueId] = useState("");
 const [refreshing, setRefreshing] = useState(false);
 const [isEditing, setIsEditing] = useState(false);
 const [assets, setAssets] = useState<Array<Asset>>();
-const [currencies, setCurrencies] = useState();
-const [assetTypeId, setAssetTypeId] = useState('');
+const [currencies, setCurrencies] = useState<Currency>();
+const [assetTypeId, setAssetTypeId] = useState(1);
 const [editingAssetId, setEditingAssetId] = useState('');
+const [total, setTotal] = useState(0);
 const dispatch = useDispatch();
 
 useEffect(() => {
   getAssetData();
 }, [refreshing]);
 
-// useEffect(() => {
-//     getAssetData();
-//     unsub((data: any) => {
-//       setCurrencies(data);
-//     });
-// }, []);
+useEffect(() => {
+  calculateTotal();
+}, [assetTypeId]);
+
+useEffect(() => {
+  unsub((data: Currency) => {
+    setCurrencies(data);
+    calculateTotal();
+  });
+}, []);
 
 const getAssetData = () => {
   DeviceInfo.getUniqueId().then((id) => {
       setUniqueId(id);
       let assets = getAssets(id);
       setAssets(assets);
+      calculateTotal();
     });
+}
+
+const calculateTotal = () => {
+  if(assetTypeId == null)
+  return;
+  let totalAmount = 0;
+  assets?.forEach(item => {
+    if(assetTypeId == item.AssetTypeId)
+    {
+        totalAmount += item.Amount;
+    }
+    else{
+      switch(item.AssetTypeId)
+      {
+        case assetTypeIdEnum.USD:
+            totalAmount += (item.Amount * currencies?.buyingUsd!);
+          break;
+          case assetTypeIdEnum.EUR:
+            totalAmount += (item.Amount * currencies?.buyingEur!);
+          break;
+          case assetTypeIdEnum.GBP:
+            totalAmount += (item.Amount * currencies?.buyingGbp!);
+          break;
+          case assetTypeIdEnum.CHF:
+            totalAmount += (item.Amount * currencies?.buyingChf!);
+          break;
+          case assetTypeIdEnum.CAD:
+            totalAmount += (item.Amount * currencies?.buyingCad!);
+          break;
+          case assetTypeIdEnum.AUD:
+            totalAmount += (item.Amount * currencies?.buyingAud!);
+          break;
+          case assetTypeIdEnum.GRAM:
+            totalAmount += (item.Amount * currencies?.buyingGram!);
+          break;
+          case assetTypeIdEnum.CEYREK:
+            totalAmount += (item.Amount * currencies?.buyingCeyrek!);
+          break;
+          case assetTypeIdEnum.YARIM:
+            totalAmount += (item.Amount * currencies?.buyingYarim!);
+          break;
+          case assetTypeIdEnum.TAM:
+            totalAmount += (item.Amount * currencies?.buyingTam!);
+          break;
+          case assetTypeIdEnum.CUMHURIYET:
+            totalAmount += (item.Amount * currencies?.buyingCumhuriyet!);
+          break;
+          default:
+            break;
+      }
+    }
+  });
+  setTotal(totalAmount);
 }
 
 const handleDelete = (rowData: any, rowMap: any) => {
@@ -141,8 +202,12 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
     <>
     <SafeAreaView style={{flex: 1}}>
       <View style={{ margin: 10, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <AssetPicker onChange={(value: any) => setAssetTypeId(value)} />
-        <Text style={{ fontSize: fontSize }}>1000 TRY</Text>
+        <AssetPicker onChange={(value: number) => 
+        {
+          if(value)
+          setAssetTypeId(value)
+        }} />
+        <Text style={{ fontSize: fontSize }}>{total.toFixed(2)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
       </View>
       <SwipeListView
       style={{paddingBottom:100}}

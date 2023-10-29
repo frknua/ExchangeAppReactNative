@@ -1,5 +1,6 @@
 import { collection, doc, setDoc, db, getDoc, addDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, query, orderBy, onSnapshot } from "../firebase/Config";
 import { Asset } from "../types/asset";
+import { Currency } from "../types/Currency";
 import { assetTypes } from "../constants/AssetTypes";
 
 const addAsset = async (userId:string, assetTypeId: number, amount: number) => {
@@ -67,7 +68,33 @@ const deleteAsset = async (userId:string, documentId: string) => {
 const unsub = (callback:any) => onSnapshot(doc(db, "currencies", "current"), (doc) => {
     if(doc.exists())
     {
-        callback(doc.data());
+        let docData = doc.data();
+        let currencies: Currency = {
+            buyingUsd: docData.buyingUsd,
+            sellingUsd: docData.sellingUsd,
+            buyingEur: docData.buyingEur,
+            sellingEur: docData.sellingEur,
+            buyingGbp: docData.buyingGbp,
+            sellingGbp: docData.sellingGbp,
+            buyingChf: docData.buyingChf,
+            sellingChf: docData.sellingChf,
+            buyingCad: docData.buyingCad,
+            sellingCad: docData.sellingCad,
+            buyingAud: docData.buyingAud,
+            sellingAud: docData.sellingAud,
+            buyingGram: docData.buyingGram,
+            sellingGram: docData.sellingGram,
+            buyingCeyrek: docData.buyingCeyrek,
+            sellingCeyrek: docData.sellingCeyrek,
+            buyingYarim: docData.buyingYarim,
+            sellingYarim: docData.sellingYarim,
+            buyingTam: docData.buyingTam,
+            sellingTam: docData.sellingTam,
+            buyingCumhuriyet: docData.buyingCumhuriyet,
+            sellingCumhuriyet: docData.sellingCumhuriyet,
+            updateDate: docData.updateDate
+        }
+        callback(currencies);
     }
 });
 

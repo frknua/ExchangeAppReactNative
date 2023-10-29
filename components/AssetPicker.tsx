@@ -9,7 +9,7 @@ export default function AssetPicker (props:any) {
 
   useEffect(() => {
     setAssetTypeList(assetTypes.map(function(elem,index){
-      return {label:elem.symbol + " - " + elem.name, value:elem.key}
+      return {label: elem.name, value:elem.key}
     }));
   },[]);
 
