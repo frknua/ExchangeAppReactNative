@@ -1,0 +1,142 @@
+import { StyleSheet } from 'react-native';
+const backButtonWidth = 75;
+export const openWidth = backButtonWidth * 2;
+const fontSize = 16;
+const assetFullNameFontSize = 13;
+const borderRadius = 20;
+const padding = 18;
+
+export const colorWhite = '#ffffff';
+export const colorBlack = '#000000';
+export const colorHighlight = '#e5e5e5';
+const colorDanger = '#e91e63';
+const colorInfo = '#2196f3';
+const colorWarning = '#ffeb3b';
+const colorSuccess = '#4caf50';
+const colorDangerText = '#660000';
+const colorInfoText = '#0000cc';
+const colorWarningText = '#8e5500';
+const colorSuccessText = '#004c45';
+
+export const styles = StyleSheet.create({
+    mainContainer: {
+      flex: 1
+    },
+    balanceTitleContainer: {
+      marginLeft: 10,
+      marginTop: 10
+    },
+    balanceTitle:{
+      color: "gray"
+    },
+    balanceContainer: {
+      margin: 10, 
+      display: "flex", 
+      flexDirection: "row", 
+      justifyContent: "space-between", 
+      alignItems: "center"
+    },
+    balanceValue: {
+      fontSize: 18,
+      fontWeight: "700"
+    },
+    assetItem: {
+      justifyContent: 'center',
+      padding: padding,
+      margin: 10,
+      backgroundColor: colorWhite,
+      borderBottomColor: colorHighlight,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      marginVertical: 5,
+      borderRadius: borderRadius
+    },
+    assetItemView:{
+      display: "flex", 
+      flexDirection: "row", 
+      alignItems: "center"
+    },
+    assetItemNameView:{
+      flexGrow: 1
+    },
+    assetSymbol: {
+      color: colorBlack,
+      fontSize: fontSize,
+    },
+    assetFullName: {
+      fontSize: assetFullNameFontSize,
+      marginTop: 5,
+      color: "gray"
+    },
+    assetValue: {
+      color: colorBlack,
+      fontSize: fontSize
+    },
+    actionContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: "transparent",
+      flexDirection: 'row',
+      paddingHorizontal: padding,
+      marginVertical: 5,
+      margin: 10,
+      borderRadius: borderRadius
+    },
+    actionBtn: {
+      alignItems: 'center',
+      bottom: 0,
+      justifyContent: 'center',
+      position: 'absolute',
+      top: 0,
+      width: backButtonWidth,
+      borderRadius: borderRadius
+    },
+    deleteBtn: {
+      backgroundColor: colorDanger,
+      right: 0,
+      borderRadius: borderRadius
+    },
+    editBtn: {
+      backgroundColor: colorInfo,
+      right: backButtonWidth,
+      borderRadius: borderRadius
+    },
+    shadow: {
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.18,
+      shadowRadius: 1.00,
+      elevation: 1
+    },
+    input: {
+        height: 45,
+        marginBottom: 10,
+        backgroundColor: colorWhite,
+        color: "#000",
+        padding: 8,
+        fontSize: 16,
+        borderRadius: 20
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: colorWhite,
+        padding: 12,
+        borderRadius: 20,
+        marginTop: 10
+    },
+    buttonText: {
+        fontSize: 16
+    },
+    modalContainer: {
+        backgroundColor: "#e0e0e0", 
+        marginTop: 400
+    },
+    modalMainView: {
+        display: "flex", 
+        flexDirection: "column", 
+        margin: 15
+    }
+  });

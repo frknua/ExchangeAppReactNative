@@ -24,23 +24,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { assetTypes, assetTypeIdEnum } from '../constants/AssetTypes';
 import { Currency } from '../types/Currency';
-
-export const backButtonWidth = 75;
-export const openWidth = backButtonWidth * 2;
-export const fontSize = 16;
-export const padding = 18;
-
-export const colorBackground = '#ffffff';
-export const colorText = '#000000';
-export const colorHighlight = '#e5e5e5';
-export const colorDanger = '#e91e63';
-export const colorInfo = '#2196f3';
-export const colorWarning = '#ffeb3b';
-export const colorSuccess = '#4caf50';
-export const colorDangerText = '#660000';
-export const colorInfoText = '#0000cc';
-export const colorWarningText = '#8e5500';
-export const colorSuccessText = '#004c45';
+import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalStyles';
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
@@ -201,12 +185,12 @@ const onRefresh = useCallback(() => {
 const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
   return (
     <TouchableHighlight
-      style={styles.rowFront}
+      style={[styles.assetItem, styles.shadow]}
       underlayColor={colorHighlight}
       onPress={() => { }}>
-      <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        <View style={{ flexGrow: 1 }}>
-          <Text style={styles.frontText}>{item.Symbol}</Text>
+      <View style={styles.assetItemView}>
+        <View style={styles.assetItemNameView}>
+          <Text style={styles.assetSymbol}>{item.Symbol}</Text>
           <Text style={styles.assetFullName}>{item.Name}</Text>
         </View>
         <View>
@@ -219,16 +203,16 @@ const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
 
 const renderHiddenItem = (rowData: any, rowMap: any) => {
   return (
-    <View style={styles.rowBack}>
+    <View style={styles.actionContainer}>
       <TouchableOpacity
-        style={[styles.backRightBtn, styles.editBtn]}
+        style={[styles.actionBtn, styles.editBtn]}
         onPress={() => handleEdit(rowData, rowMap)}>
-        <FontAwesomeIcon size={28} style={{ color: "#fff" }} name='edit' />
+        <FontAwesomeIcon size={28} style={{ color: colorWhite }} name='edit' />
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.backRightBtn, styles.dangerBtn]}
+        style={[styles.actionBtn, styles.deleteBtn]}
         onPress={() => handleDelete(rowData, rowMap)}>
-        <FontAwesomeIcon size={28} style={{ color: "#fff" }} name='trash' />
+        <FontAwesomeIcon size={28} style={{ color: colorWhite }} name='trash' />
       </TouchableOpacity>
     </View>
   );
@@ -241,17 +225,19 @@ const amountFormat = (value:number) => {
 }
   return (
     <>
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{ margin: 10, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.balanceTitleContainer}>
+        <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
+      </View>
+      <View style={styles.balanceContainer}>
         <AssetPicker onChange={(value: number) => 
         {
           if(value)
           setAssetTypeId(value)
         }} />
-        <Text style={{ fontSize: fontSize }}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+        <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
       </View>
       <SwipeListView
-      style={{paddingBottom:100}}
         data={assets}
         renderItem={renderItem}
         keyExtractor={(item) => item.ID}
@@ -284,50 +270,3 @@ const amountFormat = (value:number) => {
   </>
   );
 }
-
-const styles = StyleSheet.create({
-  rowFront: {
-    justifyContent: 'center',
-    padding: padding,
-    backgroundColor: colorBackground,
-    borderBottomColor: colorHighlight,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  frontText: {
-    color: colorText,
-    fontSize: fontSize,
-  },
-  assetFullName: {
-    fontSize: 13,
-    marginTop: 5,
-    color: "gray"
-  },
-  assetValue: {
-    color: colorText,
-    fontSize: 15
-  },
-  rowBack: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: colorBackground,
-    flexDirection: 'row',
-    paddingHorizontal: padding,
-  },
-  backRightBtn: {
-    alignItems: 'center',
-    bottom: 0,
-    justifyContent: 'center',
-    position: 'absolute',
-    top: 0,
-    width: backButtonWidth,
-  },
-  dangerBtn: {
-    backgroundColor: colorDanger,
-    right: 0,
-  },
-  editBtn: {
-    backgroundColor: colorInfo,
-    right: backButtonWidth
-  },
-});

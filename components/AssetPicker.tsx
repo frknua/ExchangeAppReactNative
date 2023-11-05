@@ -2,6 +2,7 @@ import React, {Component, useState, useEffect} from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { assetTypes } from '../constants/AssetTypes';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { styles } from '../styles/globalStyles';
 
 export default function AssetPicker (props:any) {
   const [assetTypeList, setAssetTypeList] = useState<any>([]);
@@ -32,8 +33,9 @@ export default function AssetPicker (props:any) {
                 paddingVertical: 12,
                 paddingHorizontal: 10,
                 backgroundColor: "#fff",
-                borderRadius: 8,
+                borderRadius: 20,
                 minWidth: 230,
+                ...styles.shadow,
                 ...props.style,
               },
               inputAndroid: {
@@ -43,8 +45,9 @@ export default function AssetPicker (props:any) {
                 paddingVertical: 12,
                 paddingHorizontal: 10,
                 backgroundColor: "#fff",
-                borderRadius: 8,
+                borderRadius: 20,
                 minWidth: 230,
+                ...styles.shadow,
                 ...props.style,
               },
               iconContainer: {
