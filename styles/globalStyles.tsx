@@ -17,6 +17,7 @@ const colorDangerText = '#660000';
 const colorInfoText = '#0000cc';
 const colorWarningText = '#8e5500';
 const colorSuccessText = '#004c45';
+const fontFamily = "MarkPro";
 
 export const styles = StyleSheet.create({
     mainContainer: {
@@ -27,7 +28,8 @@ export const styles = StyleSheet.create({
       marginTop: 10
     },
     balanceTitle:{
-      color: "gray"
+      color: "gray",
+      fontFamily: fontFamily
     },
     balanceContainer: {
       margin: 10, 
@@ -38,7 +40,8 @@ export const styles = StyleSheet.create({
     },
     balanceValue: {
       fontSize: 18,
-      fontWeight: "700"
+      fontWeight: "700",
+      fontFamily: fontFamily
     },
     assetItem: {
       justifyContent: 'center',
@@ -61,15 +64,18 @@ export const styles = StyleSheet.create({
     assetSymbol: {
       color: colorBlack,
       fontSize: fontSize,
+      fontFamily: fontFamily
     },
     assetFullName: {
       fontSize: assetFullNameFontSize,
       marginTop: 5,
-      color: "gray"
+      color: "gray",
+      fontFamily: fontFamily
     },
     assetValue: {
       color: colorBlack,
-      fontSize: fontSize
+      fontSize: fontSize,
+      fontFamily: fontFamily
     },
     actionContainer: {
       flex: 1,
