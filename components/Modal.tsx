@@ -17,8 +17,13 @@ export default function Modal(props: any) {
     const [assetTypeId, setAssetTypeId] = useState('');
     let assetPickerParam = {
         style: {
-            width: "auto"
-        }
+            width: "100%"
+        },
+        icon:{
+            position: "absolute",
+            top: 10,
+            right: 12
+          }
     }
     return (
         <Portal>
@@ -31,7 +36,7 @@ export default function Modal(props: any) {
                         placeholder="Miktar Giriniz"
                         keyboardType="numeric"
                     />
-                    {!props.isEditMode && <AssetPicker style={assetPickerParam.style} onChange={(value: any) => setAssetTypeId(value)}></AssetPicker>}
+                    {!props.isEditMode && <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: any) => setAssetTypeId(value)}></AssetPicker>}
                     <TouchableOpacity style={[styles.button, styles.shadow]}
                         onPress={() => {
                             props.onSave(props.isEditMode ? null : Number(assetTypeId), Number(amount));

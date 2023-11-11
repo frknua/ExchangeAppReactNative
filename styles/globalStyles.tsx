@@ -23,18 +23,15 @@ export const styles = StyleSheet.create({
     mainContainer: {
       flex: 1
     },
-    test:{
-      position: "absolute",
-      height: 190,
-      top: 0,
-      width: "100%",
-    },
     linearGradient: {
       flex: 1,
+      position: "absolute",
+      height: 170,
+      top: 0,
+      width: "100%",
       // borderRadius: borderRadius
     },
     balanceMainContainer:{
-      borderRadius: borderRadius,
       padding: 10,
       backgroundColor: "transparent",
       display: "flex",
@@ -46,10 +43,11 @@ export const styles = StyleSheet.create({
       marginBottom: 10
     },
     balanceTitle:{
-      color: colorWhite,
+      color: colorHighlight,
       fontFamily: fontFamily,
       marginBottom: 10,
-      fontSize: 16
+      fontSize: 13,
+      fontWeight: "500"
     },
     balanceContainer: {
       margin: 10, 
@@ -60,10 +58,9 @@ export const styles = StyleSheet.create({
     },
     balanceValue: {
       fontSize: 24,
-      fontWeight: "700",
+      fontWeight: "800",
       fontFamily: fontFamily,
       color: colorWhite,
-      marginBottom: 10
     },
     assetItem: {
       justifyContent: 'center',
@@ -84,7 +81,8 @@ export const styles = StyleSheet.create({
     assetSymbol: {
       color: colorBlack,
       fontSize: fontSize,
-      fontFamily: fontFamily
+      fontFamily: fontFamily,
+      fontWeight: "500"
     },
     assetFullName: {
       fontSize: assetFullNameFontSize,
@@ -95,7 +93,8 @@ export const styles = StyleSheet.create({
     assetValue: {
       color: colorBlack,
       fontSize: fontSize,
-      fontFamily: fontFamily
+      fontFamily: fontFamily,
+      fontWeight: "500"
     },
     actionContainer: {
       flex: 1,
@@ -167,5 +166,9 @@ export const styles = StyleSheet.create({
     },
     swipeList: {
       
+    },
+    addButtonView: {
+      position:"absolute", 
+      right: 15
     }
   });

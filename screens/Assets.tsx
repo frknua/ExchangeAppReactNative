@@ -8,7 +8,8 @@ import {
     Alert,
     RefreshControl,
     ListRenderItemInfo,
-    useColorScheme
+    useColorScheme,
+    Pressable
   } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
 
@@ -26,6 +27,7 @@ import { assetTypes, assetTypeIdEnum } from '../constants/AssetTypes';
 import { Currency } from '../types/Currency';
 import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
+import Feather from 'react-native-vector-icons/Feather';
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
@@ -227,35 +229,36 @@ const amountFormat = (value:number) => {
 
 let assetPickerParam = {
   style: {
-      // width: 50,
-      // marginBottom: 10,
       backgroundColor: "transparent",
-      borderColor: "#fff",
-      borderWidth: 1,
-      color: "#fff",
-      // minWidth: 150
-      textAlign: "center",
-      // flex: 1
+      color: "#fff"
   },
   icon:{
     color: "#fff",
-    top: 10,
-    // right: 100
+    backgroundColor: "transparent",
   }
 }
 
   return (
     <>
     <SafeAreaView style={styles.mainContainer}>
-      
-      <View style={[styles.test]}>
       {/* colors={['#c183be', '#e91a75', "#a60079"]} */}
       {/* colors={['#e91a75', "#b90376"] */}
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#e91a75', "#a60079"]} style={styles.linearGradient}>
         </LinearGradient>
-      </View>
-   
+        
       <View style={[styles.balanceMainContainer]}>
+      <View style={styles.addButtonView}>
+          <Pressable onPress={() => dispatch(showModal(true))}>
+                    {({ pressed }) => (
+                      <Feather
+                        name="plus-circle"
+                        size={25}
+                        color={colorWhite}
+                        style={{ opacity: pressed ? 0.5 : 1 }}
+                      />
+                    )}
+              </Pressable>
+        </View>
           <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
           <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
           <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 

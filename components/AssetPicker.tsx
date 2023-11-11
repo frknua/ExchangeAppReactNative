@@ -26,15 +26,26 @@ export default function AssetPicker (props:any) {
                 color: 'gray',
                 fontSize: 16
               },
+              inputIOSContainer:{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              },
+              inputAndroidContainer: {
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              },
               inputIOS: {
                 color: 'black',
                 fontSize: 16,
-                paddingRight:30,
+                padding: 10,
                 paddingVertical: 12,
-                paddingHorizontal: 10,
                 backgroundColor: "#fff",
                 borderRadius: 20,
-                minWidth: 230,
+                // minWidth: 230,
                 fontFamily: "MarkPro",
                 ...styles.shadow,
                 ...props.style,
@@ -42,19 +53,17 @@ export default function AssetPicker (props:any) {
               inputAndroid: {
                 color: 'black',
                 fontSize: 16,
-                paddingRight:30,
+                padding: 10,
                 paddingVertical: 12,
-                paddingHorizontal: 10,
                 backgroundColor: "#fff",
                 borderRadius: 20,
-                minWidth: 230,
+                // minWidth: 230,
                 fontFamily: "MarkPro",
                 ...styles.shadow,
                 ...props.style,
               },
               iconContainer: {
-                top: 10,
-                right: 12,
+                position: "relative",
                 ...props.icon
               },
             }}
