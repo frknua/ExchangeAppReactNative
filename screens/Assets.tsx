@@ -25,6 +25,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import { assetTypes, assetTypeIdEnum } from '../constants/AssetTypes';
 import { Currency } from '../types/Currency';
 import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalStyles';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
@@ -223,19 +224,45 @@ const amountFormat = (value:number) => {
   let index = stringValue.indexOf(".");
   return index != -1 ? stringValue.substring(0,index+3) : stringValue + ".00";
 }
+
+let assetPickerParam = {
+  style: {
+      // width: 50,
+      // marginBottom: 10,
+      backgroundColor: "transparent",
+      borderColor: "#fff",
+      borderWidth: 1,
+      color: "#fff",
+      // minWidth: 150
+      textAlign: "center",
+      // flex: 1
+  },
+  icon:{
+    color: "#fff",
+    top: 10,
+    // right: 100
+  }
+}
+
   return (
     <>
     <SafeAreaView style={styles.mainContainer}>
-      <View style={styles.balanceTitleContainer}>
-        <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
+      
+      <View style={[styles.test]}>
+      {/* colors={['#c183be', '#e91a75', "#a60079"]} */}
+      {/* colors={['#e91a75', "#b90376"] */}
+        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#e91a75', "#a60079"]} style={styles.linearGradient}>
+        </LinearGradient>
       </View>
-      <View style={styles.balanceContainer}>
-        <AssetPicker onChange={(value: number) => 
-        {
-          if(value)
-          setAssetTypeId(value)
-        }} />
-        <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+   
+      <View style={[styles.balanceMainContainer]}>
+          <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
+          <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+          <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 
+          {
+            if(value)
+            setAssetTypeId(value)
+          }} />
       </View>
       <SwipeListView
         data={assets}
@@ -246,6 +273,7 @@ const amountFormat = (value:number) => {
         rightOpenValue={-openWidth}
         stopRightSwipe={-openWidth}
         disableRightSwipe={true}
+        style={styles.swipeList}
       />
     </SafeAreaView>
     <Modal

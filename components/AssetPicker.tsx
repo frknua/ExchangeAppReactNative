@@ -55,6 +55,7 @@ export default function AssetPicker (props:any) {
               iconContainer: {
                 top: 10,
                 right: 12,
+                ...props.icon
               },
             }}
             onValueChange={(value) => onValueChange(value)}
@@ -67,7 +68,7 @@ export default function AssetPicker (props:any) {
           doneText='Tamam'
           useNativeAndroidPickerStyle={false}
           Icon={() => {
-            return <Octicons name="chevron-down" size={22} color="black" />
+            return <Octicons name="chevron-down" size={22} color={props.icon?.color ?? "black"} />
           }}
         />
   )

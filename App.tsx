@@ -32,6 +32,9 @@ function App(): JSX.Element {
             <Tab.Screen name="Portföy" component={Assets}
               options={{
                 title: 'Portföy',
+                headerShown: false,
+                tabBarActiveTintColor:"#e91a75",
+                tabBarInactiveTintColor: "gray",
                 tabBarIcon: ({ color, size }) => <EntypoIcon name="wallet" size={size} color={color} />,
                 headerRight: () => (
                   <Pressable onPress={() => dispatch(showModal(true))}>
@@ -48,7 +51,10 @@ function App(): JSX.Element {
               }} />
             <Tab.Screen name="Kurlar" component={Currencies}
               options={{
+                headerShown: false,
                 title: 'Kurlar',
+                tabBarActiveTintColor:"#e91a75",
+                tabBarInactiveTintColor: "gray",
                 tabBarIcon: ({ color, size }) => <FontAwesomeIcon name="exchange" size={size} color={color} />
               }} />
           </Tab.Navigator>
@@ -70,7 +76,8 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     paddingBottom: 20,
     paddingTop: 10,
-    height: 80
+    height: 80,
+    // backgroundColor: "#192f6a"
   }
 });
 

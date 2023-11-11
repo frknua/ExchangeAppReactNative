@@ -23,13 +23,33 @@ export const styles = StyleSheet.create({
     mainContainer: {
       flex: 1
     },
+    test:{
+      position: "absolute",
+      height: 190,
+      top: 0,
+      width: "100%",
+    },
+    linearGradient: {
+      flex: 1,
+      // borderRadius: borderRadius
+    },
+    balanceMainContainer:{
+      borderRadius: borderRadius,
+      padding: 10,
+      backgroundColor: "transparent",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
     balanceTitleContainer: {
       marginLeft: 10,
-      marginTop: 10
+      marginBottom: 10
     },
     balanceTitle:{
-      color: "gray",
-      fontFamily: fontFamily
+      color: colorWhite,
+      fontFamily: fontFamily,
+      marginBottom: 10,
+      fontSize: 16
     },
     balanceContainer: {
       margin: 10, 
@@ -39,17 +59,17 @@ export const styles = StyleSheet.create({
       alignItems: "center"
     },
     balanceValue: {
-      fontSize: 18,
+      fontSize: 24,
       fontWeight: "700",
-      fontFamily: fontFamily
+      fontFamily: fontFamily,
+      color: colorWhite,
+      marginBottom: 10
     },
     assetItem: {
       justifyContent: 'center',
       padding: padding,
       margin: 10,
       backgroundColor: colorWhite,
-      borderBottomColor: colorHighlight,
-      borderBottomWidth: StyleSheet.hairlineWidth,
       marginVertical: 5,
       borderRadius: borderRadius
     },
@@ -144,5 +164,8 @@ export const styles = StyleSheet.create({
         display: "flex", 
         flexDirection: "column", 
         margin: 15
+    },
+    swipeList: {
+      
     }
   });
