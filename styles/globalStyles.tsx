@@ -9,6 +9,8 @@ const padding = 18;
 export const colorWhite = '#ffffff';
 export const colorBlack = '#000000';
 export const colorHighlight = '#e5e5e5';
+export const tabBarActiveTintColor = '#1cb96a';
+export const tabBarInactiveTintColor = 'gray';
 const colorDanger = '#e91e63';
 const colorInfo = '#2196f3';
 const colorWarning = '#ffeb3b';
@@ -43,11 +45,11 @@ export const styles = StyleSheet.create({
       marginBottom: 10
     },
     balanceTitle:{
-      color: colorHighlight,
+      color: colorWhite,
       fontFamily: fontFamily,
       marginBottom: 10,
       fontSize: 13,
-      fontWeight: "500"
+      fontWeight: "700"
     },
     balanceContainer: {
       margin: 10, 
@@ -60,7 +62,7 @@ export const styles = StyleSheet.create({
       fontSize: 24,
       fontWeight: "800",
       fontFamily: fontFamily,
-      color: colorWhite,
+      color: colorWhite
     },
     assetItem: {
       justifyContent: 'center',
@@ -166,10 +168,26 @@ export const styles = StyleSheet.create({
         marginTop: 20
     },
     swipeList: {
-      
+
     },
     addButtonView: {
       position:"absolute", 
       right: 15
+    },
+    absolute: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0
+    },
+    tabBarStyle: {
+      paddingBottom: 20,
+      paddingTop: 10,
+      height: 80
+    },
+    tabBarLabelStyle:{
+      fontFamily: fontFamily, 
+      fontWeight: "700"
     }
   });

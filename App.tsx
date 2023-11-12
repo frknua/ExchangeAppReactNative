@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import { Store } from './redux/store';
 import { Host } from 'react-native-portalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { styles, tabBarActiveTintColor, tabBarInactiveTintColor } from './styles/globalStyles';
 
 function App(): JSX.Element {
   const Tab = createBottomTabNavigator();
@@ -33,8 +34,10 @@ function App(): JSX.Element {
               options={{
                 title: 'Portföy',
                 headerShown: false,
-                tabBarActiveTintColor:"#1cb96a",
-                tabBarInactiveTintColor: "gray",
+                tabBarShowLabel: true,
+                tabBarActiveTintColor: tabBarActiveTintColor,
+                tabBarLabelStyle: styles.tabBarLabelStyle,
+                tabBarInactiveTintColor: tabBarInactiveTintColor,
                 tabBarIcon: ({ color, size }) => <EntypoIcon name="wallet" size={size} color={color} />,
                 headerRight: () => (
                   <Pressable onPress={() => dispatch(showModal(true))}>
@@ -52,9 +55,11 @@ function App(): JSX.Element {
             <Tab.Screen name="Kurlar" component={Currencies}
               options={{
                 headerShown: false,
+                tabBarShowLabel: true,
                 title: 'Kurlar',
-                tabBarActiveTintColor:"#1cb96a",
-                tabBarInactiveTintColor: "gray",
+                tabBarActiveTintColor: tabBarActiveTintColor,
+                tabBarLabelStyle: styles.tabBarLabelStyle,
+                tabBarInactiveTintColor: tabBarInactiveTintColor,
                 tabBarIcon: ({ color, size }) => <FontAwesomeIcon name="exchange" size={size} color={color} />
               }} />
           </Tab.Navigator>
@@ -71,14 +76,5 @@ const ReduxProvider = () => {
     </Provider>
   )
 }
-
-const styles = StyleSheet.create({
-  tabBarStyle: {
-    paddingBottom: 20,
-    paddingTop: 10,
-    height: 80,
-    // backgroundColor: "#192f6a"
-  }
-});
 
 export default ReduxProvider;

@@ -28,6 +28,7 @@ import { Currency } from '../types/Currency';
 import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
+import { BlurView } from "@react-native-community/blur";
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
@@ -230,22 +231,20 @@ const amountFormat = (value:number) => {
 let assetPickerParam = {
   style: {
       backgroundColor: "transparent",
-      color: "#fff"
+      color: "#fff",
+      fontWeight: "700"
   },
   icon:{
     color: "#fff",
-    backgroundColor: "transparent",
+    backgroundColor: "transparent"
   }
 }
 
   return (
     <>
     <SafeAreaView style={styles.mainContainer}>
-      {/* colors={['#c183be', '#e91a75', "#a60079"]} */}
-      {/* colors={['#e91a75', "#b90376"] */}
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#28ac49', "#1cb96a"]} style={styles.linearGradient}>
         </LinearGradient>
-        
       <View style={[styles.balanceMainContainer]}>
       <View style={styles.addButtonView}>
           <Pressable onPress={() => dispatch(showModal(true))}>
@@ -279,6 +278,11 @@ let assetPickerParam = {
         style={styles.swipeList}
       />
     </SafeAreaView>
+    {openModal && <BlurView
+          style={styles.absolute}
+          blurType="light"
+          blurAmount={3}
+        />}
     <Modal
         show={openModal}
         isEditMode={isEditing}
