@@ -24,7 +24,8 @@ export default function AssetPicker (props:any) {
             style={{
               placeholder: {
                 color: 'gray',
-                fontSize: 16
+                fontSize: 16,
+                fontFamily: "MarkPro",
               },
               inputIOSContainer:{
                 display: "flex",

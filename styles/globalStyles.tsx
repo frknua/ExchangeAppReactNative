@@ -142,20 +142,25 @@ export const styles = StyleSheet.create({
         height: 45,
         marginBottom: 10,
         backgroundColor: colorWhite,
-        color: "#000",
+        color: colorBlack,
         padding: 8,
         fontSize: 16,
-        borderRadius: 20
+        borderRadius: 20,
+        fontFamily: fontFamily,
+        fontWeight: "500"
     },
     button: {
         alignItems: 'center',
-        backgroundColor: colorWhite,
+        backgroundColor: "#1cb96a",
         padding: 12,
         borderRadius: 20,
         marginTop: 10
     },
     buttonText: {
-        fontSize: 16
+        fontSize: 16,
+        color: colorWhite,
+        fontFamily: fontFamily,
+        fontWeight: "500"
     },
     modalContainer: {
         backgroundColor: "#e0e0e0", 

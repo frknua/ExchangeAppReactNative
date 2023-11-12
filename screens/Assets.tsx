@@ -194,8 +194,8 @@ const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
       onPress={() => { }}>
       <View style={styles.assetItemView}>
         <View style={styles.assetItemNameView}>
-          <Text style={styles.assetSymbol}>{item.Symbol}</Text>
-          <Text style={styles.assetFullName}>{item.Name}</Text>
+          <Text style={styles.assetSymbol}>{item.Name}</Text>
+          <Text style={styles.assetFullName}>{item.Symbol}</Text>
         </View>
         <View>
           <Text style={styles.assetValue}>{item.Amount}</Text>
