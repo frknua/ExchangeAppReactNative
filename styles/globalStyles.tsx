@@ -162,7 +162,8 @@ export const styles = StyleSheet.create({
     modalMainView: {
         display: "flex", 
         flexDirection: "column", 
-        margin: 15
+        margin: 15,
+        marginTop: 20
     },
     swipeList: {
       

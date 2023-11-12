@@ -33,7 +33,7 @@ function App(): JSX.Element {
               options={{
                 title: 'Portföy',
                 headerShown: false,
-                tabBarActiveTintColor:"#e91a75",
+                tabBarActiveTintColor:"#1cb96a",
                 tabBarInactiveTintColor: "gray",
                 tabBarIcon: ({ color, size }) => <EntypoIcon name="wallet" size={size} color={color} />,
                 headerRight: () => (
@@ -53,7 +53,7 @@ function App(): JSX.Element {
               options={{
                 headerShown: false,
                 title: 'Kurlar',
-                tabBarActiveTintColor:"#e91a75",
+                tabBarActiveTintColor:"#1cb96a",
                 tabBarInactiveTintColor: "gray",
                 tabBarIcon: ({ color, size }) => <FontAwesomeIcon name="exchange" size={size} color={color} />
               }} />

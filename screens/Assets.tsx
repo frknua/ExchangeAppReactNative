@@ -243,7 +243,7 @@ let assetPickerParam = {
     <SafeAreaView style={styles.mainContainer}>
       {/* colors={['#c183be', '#e91a75', "#a60079"]} */}
       {/* colors={['#e91a75', "#b90376"] */}
-        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#e91a75', "#a60079"]} style={styles.linearGradient}>
+        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#28ac49', "#1cb96a"]} style={styles.linearGradient}>
         </LinearGradient>
         
       <View style={[styles.balanceMainContainer]}>
