@@ -3,7 +3,7 @@ import { Asset } from "../types/asset";
 import { Currency } from "../types/Currency";
 import { assetTypes } from "../constants/AssetTypes";
 
-const addAsset = async (userId:string, assetTypeId: number, amount: number) => {
+const addAsset = async (userId:string, assetTypeId: number, amount: number, callback: any) => {
     try {
         const docRef = await addDoc(collection(db, "assets", userId, "assetList"), {
             assetTypeId: assetTypeId,
@@ -11,19 +11,50 @@ const addAsset = async (userId:string, assetTypeId: number, amount: number) => {
             symbol: assetTypes.filter(x => x.key == assetTypeId)[0].symbol,
             creationDate: serverTimestamp()
         });
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document created! ", docRef.id);
+        await getAsset(userId, docRef.id, callback);
     } catch (e) {
         console.error("Error adding document: ", e);
     }
 }
 
-const updateAsset = async (userId:string, documentId: string, amount: number) => {
+const updateAsset = async (userId:string, documentId: string, amount: number, callback: any) => {
     try {
         await updateDoc(doc(db, "assets", userId, "assetList", documentId), {
             amount: amount
         });
+        // console.log("Document updated!");
+        await getAsset(userId, documentId, callback);
     } catch (e) {
         console.error("Error updating document: ", e);
+        throw(e);
+    }
+}
+
+const getAsset = async (userId:string, documentId: string, callback: any) => {
+    try {
+        let result:Asset;
+        const docRef = doc(db, "assets", userId, "assetList", documentId);
+        getDoc(docRef).then((doc) => {
+            if(doc.exists())
+            {
+                let docData = doc.data();
+                let asset = assetTypes.filter(x => x.key == docData?.assetTypeId)[0];
+                result = {
+                    ID: doc.id,
+                    AssetTypeId: docData.assetTypeId,
+                    Symbol: asset.symbol,
+                    Name: asset.name,
+                    Amount: docData.amount
+                };
+            }
+            // console.log("tekli asset:", result);
+            callback(result);
+        });
+    }
+    catch (e) {
+        console.error("Error getting document: ", e);
+        throw(e);
     }
 }
 
@@ -48,7 +79,7 @@ const getAssets = (userId:string) => {
                 }
             });
         }
-        console.log("getAssets:", resultArray);
+        // console.log("getAssets:", resultArray);
         return resultArray;
     });
     return resultArray;
@@ -57,9 +88,11 @@ const getAssets = (userId:string) => {
     }
 }
 
-const deleteAsset = async (userId:string, documentId: string) => {
+const deleteAsset = async (userId:string, documentId: string, callback: any) => {
     try {
         await deleteDoc(doc(db, "assets", userId, 'assetList', documentId));
+        console.log("silindi...");
+        callback();
     } catch (e) {
         console.error("Error deleting document: ", e);
     }

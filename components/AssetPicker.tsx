@@ -48,7 +48,7 @@ export default function AssetPicker (props:any) {
                 borderRadius: 20,
                 // minWidth: 230,
                 fontFamily: "MarkPro",
-                ...styles.shadow,
+                // ...styles.shadow,
                 ...props.style,
               },
               inputAndroid: {
@@ -60,7 +60,7 @@ export default function AssetPicker (props:any) {
                 borderRadius: 20,
                 // minWidth: 230,
                 fontFamily: "MarkPro",
-                ...styles.shadow,
+                // ...styles.shadow,
                 ...props.style,
               },
               iconContainer: {

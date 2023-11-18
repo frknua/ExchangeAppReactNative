@@ -10,7 +10,7 @@ const [currencies, setCurrencies] = useState<Currency>();
 
 useEffect(() => {
   unsub((data: Currency) => {
-    console.log("Current data: ", data);
+    // console.log("Current data: ", data);
     setCurrencies(data);
   });
 }, []);

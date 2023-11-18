@@ -31,7 +31,7 @@ export default function Modal(props: any) {
                 avoidKeyboardLikeIOS={true}>
                 <View style={styles.modalMainView}>
                     <TextInput
-                        style={[styles.input, styles.shadow]}
+                        style={[styles.input]}
                         onChangeText={onChangeAmount}
                         placeholder="Miktar Giriniz"
                         keyboardType="numeric"
