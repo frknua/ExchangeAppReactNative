@@ -194,5 +194,10 @@ export const styles = StyleSheet.create({
     tabBarLabelStyle:{
       fontFamily: fontFamily, 
       fontWeight: "700"
+    },
+    successMessageTitle: {
+      fontFamily: fontFamily, 
+      fontSize: fontSize,
+      fontWeight: "500"
     }
   });

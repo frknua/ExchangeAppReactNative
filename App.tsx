@@ -14,6 +14,7 @@ import { Store } from './redux/store';
 import { Host } from 'react-native-portalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { styles, tabBarActiveTintColor, tabBarInactiveTintColor } from './styles/globalStyles';
+import FlashMessage from "react-native-flash-message";
 
 function App(): JSX.Element {
   const Tab = createBottomTabNavigator();
@@ -73,6 +74,7 @@ const ReduxProvider = () => {
   return (
     <Provider store={Store}>
       <App />
+      <FlashMessage />  
     </Provider>
   )
 }
