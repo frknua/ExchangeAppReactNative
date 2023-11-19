@@ -29,6 +29,8 @@ import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalS
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
 import { BlurView } from "@react-native-community/blur";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Sending ']); 
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
@@ -61,7 +63,7 @@ useEffect(() => {
 }, [currencies]);
 
 useEffect(() => {
-  onRefresh();
+  calculateTotal();
 }, [assets]);
 
 useEffect(() => {
@@ -192,9 +194,13 @@ const handleDelete = (rowData: any, rowMap: any) => {
       { text: 'İptal', onPress: () => rowMap[rowData.item.ID].closeRow(), style: 'cancel' },
       {
         text: 'Tamam', onPress: async() => {
+            setRefreshing(true);
             await deleteAsset(uniqueId,rowData.item.ID, () => {
-            deleteStateAsset(rowData.item.ID);
-            onRefresh();
+              setTimeout(() => {
+                setRefreshing(false);
+                deleteStateAsset(rowData.item.ID);    
+                calculateTotal();
+              }, 500);
           });
         }
       },
@@ -203,13 +209,8 @@ const handleDelete = (rowData: any, rowMap: any) => {
 };
 
 const deleteStateAsset = (id:string) => {
-  // let filteredAsset = assets?.filter(item => item.ID !== id);
-  // setAssets(filteredAsset);
-
-  const newFruits = assets;
-  const index = newFruits?.findIndex((v) => v.ID === id);
-  newFruits?.splice(index!, 1);
-  setAssets(newFruits);
+  let filteredAsset = assets?.filter(item => item.ID !== id);
+  setAssets(filteredAsset);
 }
 
 const handleEdit = async(rowData: any, rowMap: any) => {
@@ -225,19 +226,15 @@ const updateStateAsset = (editingAssetId: string, amount: number) => {
   });
 }
 
-const onRefresh = useCallback(() => {
-  setRefreshing(true);
-  setTimeout(() => {
-    setRefreshing(false);
-  }, 500);
-}, []);
-
-// const onRefresh = () => {
-//   setRefreshing(true);
-//   setTimeout(() => {
-//     setRefreshing(false);
-//   }, 500);
-// };
+const onRefresh = () => {
+  if(!refreshing)
+  {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }
+};
 
 const amountFormat = (value:number) => {
   let stringValue = value.toString();
@@ -262,7 +259,7 @@ const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
     <TouchableHighlight
       style={[styles.assetItem, styles.shadow]}
       underlayColor={colorHighlight}
-      onPress={() => onRefresh()}>
+      onPress={() => onRefresh}>
       <View style={styles.assetItemView}>
         <View style={styles.assetItemNameView}>
           <Text style={styles.assetSymbol}>{item.Name}</Text>
@@ -342,20 +339,28 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         }
         onSave={async (assetTypeId: number, amount: number) => {
           if (assetTypeId) {
+            setRefreshing(true);
             await addAsset(uniqueId, assetTypeId, amount, (added:Asset) =>{
                 console.log("added", added);
                 setIsEditing(false);
                 assets?.push(added);
-                onRefresh();
+                setTimeout(() => {
+                  setRefreshing(false);
+                  calculateTotal();
+                }, 500);
             });
             
           }
           else {
+            setRefreshing(true);
             await updateAsset(uniqueId, editingAssetId, amount, (updated:Asset) => {
               console.log("updated",updated)
               updateStateAsset(editingAssetId, amount);
-              onRefresh();
               setIsEditing(false);
+              setTimeout(() => {
+                setRefreshing(false);
+                calculateTotal();
+              }, 500);
             });
           }
         }}
