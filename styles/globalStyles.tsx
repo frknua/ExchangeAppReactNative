@@ -19,16 +19,18 @@ const colorDangerText = '#660000';
 const colorInfoText = '#0000cc';
 const colorWarningText = '#8e5500';
 const colorSuccessText = '#004c45';
+const colorGray = "#383a50";
 const fontFamily = "MarkPro";
 
 export const styles = StyleSheet.create({
     mainContainer: {
-      flex: 1
+      flex: 1,
+      marginBottom: 5
     },
     linearGradient: {
       flex: 1,
       position: "absolute",
-      height: 170,
+      height: "24%",
       top: 0,
       width: "100%",
       // borderRadius: borderRadius
@@ -81,7 +83,7 @@ export const styles = StyleSheet.create({
       flexGrow: 1
     },
     assetSymbol: {
-      color: colorBlack,
+      color: colorGray,
       fontSize: fontSize,
       fontFamily: fontFamily,
       fontWeight: "500"
@@ -93,7 +95,7 @@ export const styles = StyleSheet.create({
       fontFamily: fontFamily
     },
     assetValue: {
-      color: colorBlack,
+      color: colorGray,
       fontSize: fontSize,
       fontFamily: fontFamily,
       fontWeight: "500"
@@ -199,5 +201,61 @@ export const styles = StyleSheet.create({
       fontFamily: fontFamily, 
       fontSize: fontSize,
       fontWeight: "500"
+    },
+    currencyMain:{
+      padding: 18,
+      borderRadius: borderRadius,
+      margin: 10,
+      backgroundColor: colorWhite,
+      marginVertical: 5,
+    },
+    currencyRenderItem: {
+      display:"flex", 
+      flexDirection:"row", 
+      alignContent: "space-between",
+      
+    },
+    currencyNameView: {
+      flex: 1
+    },
+    currencyValueViewMain:{
+      display: "flex", 
+      flex: 1, 
+      flexDirection: "row", 
+      alignItems:"center", 
+      alignContent: "space-between"
+    },
+    currencyValueView: {
+      flex: 1, 
+      alignItems:"flex-end"
+    },
+    currencyName: {
+      color: colorGray,
+      fontSize: 15,
+      fontFamily: fontFamily,
+      fontWeight: "500"
+    },
+    currencySymbol: {
+      fontSize: assetFullNameFontSize,
+      color: "gray",
+      fontFamily: fontFamily,
+      marginBottom: 3
+    },
+    currencyValueTitle:{
+      fontSize: assetFullNameFontSize,
+      color: "gray",
+      fontFamily: fontFamily,
+      marginBottom: 3,
+    },
+    currencyValue: {
+      fontSize: 15,
+      fontFamily: fontFamily,
+      fontWeight: "500",
+      color: colorGray
+    },
+    currencyLinearGradient: {
+      display: "flex",
+      height: "10%",
+      marginBottom: 5
     }
   });
