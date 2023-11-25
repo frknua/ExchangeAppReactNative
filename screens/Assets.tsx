@@ -41,7 +41,7 @@ const [refreshing, setRefreshing] = useState(false);
 const [isEditing, setIsEditing] = useState(false);
 const [assets, setAssets] = useState<Array<Asset>>();
 const [currencies, setCurrencies] = useState<Currency>();
-const [assetTypeId, setAssetTypeId] = useState(null);
+const [assetTypeId, setAssetTypeId] = useState<number|null>(null);
 const [editingAssetId, setEditingAssetId] = useState('');
 const [total, setTotal] = useState(0);
 const dispatch = useDispatch();
@@ -49,7 +49,6 @@ const dispatch = useDispatch();
 useEffect(() => {
   if(refreshing)
   {
-    console.log("refreshing...");
     calculateTotal();
   }
 }, [refreshing]);
@@ -72,14 +71,12 @@ useEffect(() => {
 
 useEffect(() => {
   DeviceInfo.getUniqueId().then((id) => {
-      console.log("1-uniqueId alındı...:", id);
       setUniqueId(id);
       getAssetData();
       if(!currencies?.updateDate)
       {
         unsub((data: Currency) => {
           setCurrencies(data);
-          console.log("3-kurlar alındı...");
           calculateTotal();
         });
       }
@@ -91,7 +88,6 @@ const getAssetData = () => {
   {
     let result = getAssets(uniqueId);
     setAssets(result);
-    console.log("2-asset ler alındı...:", result);
   }
 }
 
@@ -100,90 +96,20 @@ const calculateTotal = () => {
   return;
   let totalAmount = 0;
   assets?.forEach(item => {
-    switch(item.AssetTypeId)
+    if(item.AssetTypeId == assetTypeIdEnum.TRY)
     {
-        case assetTypeIdEnum.TRY:
-            totalAmount += item.Amount;
-        break;
-        case assetTypeIdEnum.USD:
-            totalAmount += (item.Amount * currencies?.buyingUsd!);
-        break;
-        case assetTypeIdEnum.EUR:
-          totalAmount += (item.Amount * currencies?.buyingEur!);
-        break;
-        case assetTypeIdEnum.GBP:
-          totalAmount += (item.Amount * currencies?.buyingGbp!);
-        break;
-        case assetTypeIdEnum.CHF:
-          totalAmount += (item.Amount * currencies?.buyingChf!);
-        break;
-        case assetTypeIdEnum.CAD:
-          totalAmount += (item.Amount * currencies?.buyingCad!);
-        break;
-        case assetTypeIdEnum.AUD:
-          totalAmount += (item.Amount * currencies?.buyingAud!);
-        break;
-        case assetTypeIdEnum.GRAM:
-          totalAmount += (item.Amount * currencies?.buyingGram!);
-        break;
-        case assetTypeIdEnum.CEYREK:
-          totalAmount += (item.Amount * currencies?.buyingCeyrek!);
-        break;
-        case assetTypeIdEnum.YARIM:
-          totalAmount += (item.Amount * currencies?.buyingYarim!);
-        break;
-        case assetTypeIdEnum.TAM:
-          totalAmount += (item.Amount * currencies?.buyingTam!);
-        break;
-        case assetTypeIdEnum.CUMHURIYET:
-          totalAmount += (item.Amount * currencies?.buyingCumhuriyet!);
-        break;
-        default:
-          break;
+      totalAmount += item.Amount;
+    }
+    else
+    {
+      totalAmount += (item.Amount * currencies?.data.filter(i=>i.assetTypeId == item.AssetTypeId)[0].buying!);
     }
   });
   if(assetTypeId != assetTypeIdEnum.TRY)
   {
-      switch(assetTypeId)
-      {
-        case assetTypeIdEnum.USD:
-          totalAmount /= currencies?.buyingUsd!;
-        break;
-        case assetTypeIdEnum.EUR:
-          totalAmount /= currencies?.buyingEur!;
-        break;
-        case assetTypeIdEnum.GBP:
-          totalAmount /= currencies?.buyingGbp!;
-        break;
-        case assetTypeIdEnum.CHF:
-          totalAmount /= currencies?.buyingChf!;
-        break;
-        case assetTypeIdEnum.CAD:
-          totalAmount /= currencies?.buyingCad!;
-        break;
-        case assetTypeIdEnum.AUD:
-          totalAmount /= currencies?.buyingAud!;
-        break;
-        case assetTypeIdEnum.GRAM:
-          totalAmount /= currencies?.buyingGram!;
-        break;
-        case assetTypeIdEnum.CEYREK:
-          totalAmount /= currencies?.buyingCeyrek!;
-        break;
-        case assetTypeIdEnum.YARIM:
-          totalAmount /= currencies?.buyingYarim!;
-        break;
-        case assetTypeIdEnum.TAM:
-          totalAmount /= currencies?.buyingTam!;
-        break;
-        case assetTypeIdEnum.CUMHURIYET:
-          totalAmount /= currencies?.buyingCumhuriyet!;
-        break;
-      }
+    totalAmount /= currencies?.data.filter(i=>i.assetTypeId == assetTypeId)[0].buying!;
   }
   setTotal(totalAmount);
-  console.log("4-total hesaplandı...", totalAmount);
-  // console.log("asset ler...:", assets);
 }
 
 const handleDelete = (rowData: any, rowMap: any) => {

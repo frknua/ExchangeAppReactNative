@@ -51,26 +51,26 @@ export const assetTypes = [
     {
         key: assetTypeIdEnum.GRAM,
         name: "Gram Altın",
-        symbol: ""
+        symbol: "Gram Altın"
     },
     {
         key: assetTypeIdEnum.CEYREK,
         name: "Çeyrek Altın",
-        symbol: ""
+        symbol: "Çeyrek Altın"
     },
     {
         key: assetTypeIdEnum.YARIM,
         name: "Yarım Altın",
-        symbol: ""
+        symbol: "Yarım Altın"
     },
     {
         key: assetTypeIdEnum.TAM,
         name: "Tam Altın",
-        symbol: ""
+        symbol: "Tam Altın"
     },
     {
         key: assetTypeIdEnum.CUMHURIYET,
         name: "Cumhuriyet Altını",
-        symbol: ""
+        symbol: "Cumhuriyet Altını"
     }
 ];

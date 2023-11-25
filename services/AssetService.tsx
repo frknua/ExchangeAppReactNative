@@ -1,7 +1,7 @@
 import { collection, doc, setDoc, db, getDoc, addDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, query, orderBy, onSnapshot } from "../firebase/Config";
 import { Asset } from "../types/asset";
 import { Currency } from "../types/Currency";
-import { assetTypes } from "../constants/AssetTypes";
+import { assetTypeIdEnum, assetTypes } from "../constants/AssetTypes";
 
 const addAsset = async (userId:string, assetTypeId: number, amount: number, callback: any) => {
     try {
@@ -11,7 +11,6 @@ const addAsset = async (userId:string, assetTypeId: number, amount: number, call
             symbol: assetTypes.filter(x => x.key == assetTypeId)[0].symbol,
             creationDate: serverTimestamp()
         });
-        // console.log("Document created! ", docRef.id);
         await getAsset(userId, docRef.id, callback);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -23,7 +22,6 @@ const updateAsset = async (userId:string, documentId: string, amount: number, ca
         await updateDoc(doc(db, "assets", userId, "assetList", documentId), {
             amount: amount
         });
-        // console.log("Document updated!");
         await getAsset(userId, documentId, callback);
     } catch (e) {
         console.error("Error updating document: ", e);
@@ -48,7 +46,6 @@ const getAsset = async (userId:string, documentId: string, callback: any) => {
                     Amount: docData.amount
                 };
             }
-            // console.log("tekli asset:", result);
             callback(result);
         });
     }
@@ -79,7 +76,6 @@ const getAssets = (userId:string) => {
                 }
             });
         }
-        // console.log("getAssets:", resultArray);
         return resultArray;
     });
     return resultArray;
@@ -91,7 +87,6 @@ const getAssets = (userId:string) => {
 const deleteAsset = async (userId:string, documentId: string, callback: any) => {
     try {
         await deleteDoc(doc(db, "assets", userId, 'assetList', documentId));
-        console.log("silindi...");
         callback();
     } catch (e) {
         console.error("Error deleting document: ", e);
@@ -102,32 +97,67 @@ const unsub = (callback:any) => onSnapshot(doc(db, "currencies", "current"), (do
     if(doc.exists())
     {
         let docData = doc.data();
-        let currencies: Currency = {
-            buyingUsd: docData.buyingUsd,
-            sellingUsd: docData.sellingUsd,
-            buyingEur: docData.buyingEur,
-            sellingEur: docData.sellingEur,
-            buyingGbp: docData.buyingGbp,
-            sellingGbp: docData.sellingGbp,
-            buyingChf: docData.buyingChf,
-            sellingChf: docData.sellingChf,
-            buyingCad: docData.buyingCad,
-            sellingCad: docData.sellingCad,
-            buyingAud: docData.buyingAud,
-            sellingAud: docData.sellingAud,
-            buyingGram: docData.buyingGram,
-            sellingGram: docData.sellingGram,
-            buyingCeyrek: docData.buyingCeyrek,
-            sellingCeyrek: docData.sellingCeyrek,
-            buyingYarim: docData.buyingYarim,
-            sellingYarim: docData.sellingYarim,
-            buyingTam: docData.buyingTam,
-            sellingTam: docData.sellingTam,
-            buyingCumhuriyet: docData.buyingCumhuriyet,
-            sellingCumhuriyet: docData.sellingCumhuriyet,
-            updateDate: docData.updateDate
-        }
-        callback(currencies);
+        let result: Currency = {
+            updateDate: docData.updateDate,
+            data: [
+                {
+                    assetTypeId: assetTypeIdEnum.USD,
+                    buying: docData.buyingUsd,
+                    selling: docData.sellingUsd
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.EUR,
+                    buying: docData.buyingEur,
+                    selling: docData.sellingEur
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.GBP,
+                    buying: docData.buyingGbp,
+                    selling: docData.sellingGbp
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.CHF,
+                    buying: docData.buyingChf,
+                    selling: docData.sellingChf
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.CAD,
+                    buying: docData.buyingCad,
+                    selling: docData.sellingCad
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.AUD,
+                    buying: docData.buyingAud,
+                    selling: docData.sellingAud
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.GRAM,
+                    buying: docData.buyingGram,
+                    selling: docData.sellingGram
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.CEYREK,
+                    buying: docData.buyingCeyrek,
+                    selling: docData.sellingCeyrek
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.YARIM,
+                    buying: docData.buyingYarim,
+                    selling: docData.sellingYarim
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.TAM,
+                    buying: docData.buyingTam,
+                    selling: docData.sellingTam
+                },
+                {
+                    assetTypeId: assetTypeIdEnum.CUMHURIYET,
+                    buying: docData.buyingCumhuriyet,
+                    selling: docData.sellingCumhuriyet
+                }
+            ]
+        };
+        callback(result);
     }
 });
 

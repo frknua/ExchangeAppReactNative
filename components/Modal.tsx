@@ -15,6 +15,10 @@ export default function Modal(props: any) {
 
     const [amount, onChangeAmount] = useState('');
     const [assetTypeId, setAssetTypeId] = useState('');
+    const setAmount = (text:string) => {
+        onChangeAmount(text.replace(",","."));
+    }
+
     let assetPickerParam = {
         style: {
             width: "100%"
@@ -32,7 +36,7 @@ export default function Modal(props: any) {
                 <View style={styles.modalMainView}>
                     <TextInput
                         style={[styles.input]}
-                        onChangeText={onChangeAmount}
+                        onChangeText={(t) => setAmount(t)}
                         placeholder="Miktar Giriniz"
                         keyboardType="numeric"
                     />

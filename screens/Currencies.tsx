@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet,SafeAreaView, useColorScheme, View, Text, TouchableHighlight,ListRenderItemInfo, FlatList, StatusBar} from 'react-native';
+import {SafeAreaView, useColorScheme, View, Text, FlatList} from 'react-native';
 import Colors from '../constants/Colors';
 import { unsub } from '../services/AssetService';
-import { Currency } from '../types/Currency';
+import { Currency, CurrencyItem } from '../types/Currency';
 import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalStyles';
-import LinearGradient from 'react-native-linear-gradient';
-import { SwipeListView } from 'react-native-swipe-list-view';
 import { assetTypes } from '../constants/AssetTypes';
 
 export default function Currencies() {
@@ -14,31 +12,27 @@ const [currencies, setCurrencies] = useState<Currency>();
 
 useEffect(() => {
   unsub((data: Currency) => {
-    console.log("Current data: ", data);
     setCurrencies(data);
   });
 }, []);
 
-const renderItem = () => {
-  for (const [key, value] of Object.entries(currencies!)) {
-    console.log(`${key}: ${value}`);
-  }
+const renderItem = (item:any) => {
   return (
    <>
       <View style={[styles.currencyMain, styles.shadow]}>
       <View style={[styles.currencyRenderItem]}>
         <View style={styles.currencyNameView}>
-          <Text style={styles.currencySymbol}>Amerikan Doları</Text>
-          <Text style={styles.currencyName}>USD</Text>
+          <Text style={styles.currencySymbol}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.name}</Text>
+          <Text style={styles.currencyName}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.symbol}</Text>
         </View>
         <View style={styles.currencyValueViewMain}>
         <View style={styles.currencyValueView}>
             <Text style={styles.currencyValueTitle}>Alış</Text>
-            <Text style={styles.currencyValue}>{currencies?.buyingUsd}</Text>
+            <Text style={styles.currencyValue}>{item.item.buying}</Text>
           </View>
           <View style={styles.currencyValueView}>
             <Text style={styles.currencyValueTitle}>Satış</Text>
-            <Text style={styles.currencyValue}>{currencies?.sellingUsd}</Text>
+            <Text style={styles.currencyValue}>{item.item.selling}</Text>
           </View>
         </View>
       </View>
@@ -49,16 +43,8 @@ const renderItem = () => {
 
   return (
    <>
-   {/* <View style={{height:"15%", backgroundColor: "#28ac49"}}>
-        <StatusBar translucent barStyle="light-content" />
-    </View> */}
-  {/* <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#28ac49', "#1cb96a"]} style={styles.currencyLinearGradient}>
-  </LinearGradient> */}
     <SafeAreaView style={styles.mainContainer}>
-      <FlatList
-        data={[currencies]}
-        renderItem={() => renderItem()}
-      />
+        <FlatList data={currencies?.data} renderItem={renderItem} />
     </SafeAreaView>
     </>
   );
