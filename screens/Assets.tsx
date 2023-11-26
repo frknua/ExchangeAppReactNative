@@ -1,6 +1,5 @@
 import {
     SafeAreaView,
-    StyleSheet,
     View,
     Text,
     TouchableHighlight,
@@ -9,10 +8,9 @@ import {
     RefreshControl,
     ListRenderItemInfo,
     useColorScheme,
-    Pressable,
-    LogBox
+    Pressable
   } from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Colors from '../constants/Colors';
 import DeviceInfo from 'react-native-device-info';
@@ -26,11 +24,12 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { assetTypes, assetTypeIdEnum } from '../constants/AssetTypes';
 import { Currency } from '../types/Currency';
-import { styles, colorHighlight, openWidth, colorWhite } from '../styles/globalStyles';
+import { styles } from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
 import { BlurView } from "@react-native-community/blur";
 import { showMessage } from "react-native-flash-message";
+import Dimensions from '../constants/Dimensions';
 
 export default function Assets() {
 const isDarkMode = useColorScheme() === 'dark';
@@ -171,12 +170,12 @@ let assetPickerParam = {
   },
   style: {
       backgroundColor: "transparent",
-      color: "#fff",
+      color: Colors.light.textSecondary,
       fontWeight: "700",
       paddingLeft: 0
   },
   icon:{
-    color: "#fff",
+    color: Colors.light.textSecondary,
     backgroundColor: "transparent"
   }
 }
@@ -193,16 +192,16 @@ const showInfoMessage = (message: string) => {
 const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
   return (
     <TouchableHighlight
-      style={[styles.assetItem, styles.shadow]}
-      underlayColor={colorHighlight}
+      style={[styles.assetItem, styles.shadow, isDarkMode ? styles.assetItemDark : styles.assetItemLight]}
+      underlayColor={isDarkMode ? Colors.dark.highlight : Colors.light.highlight}
       onPress={() => {}}>
       <View style={styles.assetItemView}>
         <View style={styles.assetItemNameView}>
-          <Text style={styles.assetFullName}>{item.Name}</Text>
-          <Text style={styles.assetSymbol}>{item.Symbol}</Text>
+          <Text style={[styles.assetFullName, isDarkMode ? styles.assetFullNameDark : styles.assetFullNameLight]}>{item.Name}</Text>
+          <Text style={[styles.assetSymbol, isDarkMode ? styles.assetSymbolDark : styles.assetSymbolLight]}>{item.Symbol}</Text>
         </View>
         <View>
-          <Text style={styles.assetValue}>{item.Amount}</Text>
+          <Text style={[styles.assetValue, isDarkMode ? styles.assetValueDark : styles.assetValueLight]}>{item.Amount}</Text>
         </View>
       </View>
     </TouchableHighlight>
@@ -215,12 +214,12 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
       <TouchableOpacity
         style={[styles.actionBtn, styles.editBtn]}
         onPress={() => handleEdit(rowData, rowMap)}>
-        <FontAwesomeIcon size={28} style={{ color: colorWhite }} name='edit' />
+        <FontAwesomeIcon size={28} style={{ color: Colors.light.textSecondary }} name='edit' />
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.actionBtn, styles.deleteBtn]}
         onPress={() => handleDelete(rowData, rowMap)}>
-        <FontAwesomeIcon size={28} style={{ color: colorWhite }} name='trash' />
+        <FontAwesomeIcon size={28} style={{ color: Colors.light.textSecondary }} name='trash' />
       </TouchableOpacity>
     </View>
   );
@@ -228,8 +227,8 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
 
   return (
     <>
-    <SafeAreaView style={styles.mainContainer}>
-        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#28ac49', "#1cb96a"]} style={styles.linearGradient}>
+    <SafeAreaView style={[styles.mainContainer, isDarkMode ? styles.darkbg : styles.lightbg]}>
+        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={isDarkMode ? [Colors.dark.balanceBackgroundPrimary, Colors.dark.balanceBackgroundSecondary] : [Colors.light.balanceBackgroundPrimary, Colors.light.balanceBackgroundSecondary]} style={[styles.linearGradient, styles.shadow, isDarkMode ? styles.linearGradientDark : styles.linearGradientLight]}>
           <View style={[styles.balanceMainContainer]}>
             <View style={styles.balanceContainer}>
                 <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
@@ -246,7 +245,7 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
                           <Feather
                             name="plus-circle"
                             size={25}
-                            color={colorWhite}
+                            color={Colors.light.textSecondary}
                             style={{ opacity: pressed ? 0.5 : 1 }}
                           />
                         )}
@@ -260,8 +259,8 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         keyExtractor={(item) => item.ID}
         renderHiddenItem={renderHiddenItem}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        rightOpenValue={-openWidth}
-        stopRightSwipe={-openWidth}
+        rightOpenValue={-Dimensions.openWidth}
+        stopRightSwipe={-Dimensions.openWidth}
         disableRightSwipe={true}
         style={styles.swipeList}
       />
@@ -270,6 +269,7 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
     <Modal
         show={openModal}
         isEditMode={isEditing}
+        isDarkMode={isDarkMode}
         onClose={() => {
           dispatch(showModal(false));
           setIsEditing(false);

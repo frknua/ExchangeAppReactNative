@@ -1,8 +1,9 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { assetTypes } from '../constants/AssetTypes';
 import Octicons from 'react-native-vector-icons/Octicons';
-import { styles } from '../styles/globalStyles';
+import { styles, fontFamily} from '../styles/globalStyles';
+import Dimensions from '../constants/Dimensions';
 
 export default function AssetPicker (props:any) {
   const [assetTypeList, setAssetTypeList] = useState<any>([]);
@@ -24,15 +25,15 @@ export default function AssetPicker (props:any) {
             style={{
               placeholder: {
                 color: 'gray',
-                fontSize: 16,
-                fontFamily: "MarkPro",
+                fontSize: Dimensions.fontSize,
+                fontFamily: fontFamily,
               },
               inputIOSContainer:{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
-                ...props.containerStyle
+                ...props.containerStyle,
               },
               inputAndroidContainer: {
                 display: "flex",
@@ -43,25 +44,23 @@ export default function AssetPicker (props:any) {
               },
               inputIOS: {
                 color: 'black',
-                fontSize: 16,
+                fontSize: Dimensions.fontSize,
                 padding: 10,
                 backgroundColor: "#fff",
-                borderRadius: 20,
-                // minWidth: 230,
-                fontFamily: "MarkPro",
-                // ...styles.shadow,
+                borderRadius: Dimensions.borderRadius,
+                fontFamily: fontFamily,
                 ...props.style,
+                ...props.isDarkMode ? styles.assetPickerDark : styles.assetPickerLight
               },
               inputAndroid: {
                 color: 'black',
-                fontSize: 16,
+                fontSize: Dimensions.fontSize,
                 padding: 10,
                 backgroundColor: "#fff",
-                borderRadius: 20,
-                // minWidth: 230,
-                fontFamily: "MarkPro",
-                // ...styles.shadow,
+                borderRadius: Dimensions.borderRadius,
+                fontFamily: fontFamily,
                 ...props.style,
+                ...props.isDarkMode ? styles.assetPickerDark : styles.assetPickerLight
               },
               iconContainer: {
                 position: "relative",
@@ -77,6 +76,7 @@ export default function AssetPicker (props:any) {
           value={selectedAssetType}
           doneText='Tamam'
           useNativeAndroidPickerStyle={false}
+          darkTheme={props.isDarkMode}
           Icon={() => {
             return <Octicons name="chevron-down" size={22} color={props.icon?.color ?? "black"} />
           }}

@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import { Store } from './redux/store';
 import { Host } from 'react-native-portalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { styles, tabBarActiveTintColor, tabBarInactiveTintColor } from './styles/globalStyles';
+import { styles } from './styles/globalStyles';
 import FlashMessage from "react-native-flash-message";
 
 function App(): JSX.Element {
@@ -28,7 +28,7 @@ function App(): JSX.Element {
         <Host>
           <Tab.Navigator
             screenOptions={{
-              tabBarStyle: styles.tabBarStyle,
+              tabBarStyle: [styles.tabBarStyle, isDarkMode ? styles.tabBarStyleDark : styles.tabBarStyleLight],
             }}
           >
             <Tab.Screen name="Portföy" component={Assets}
@@ -36,9 +36,9 @@ function App(): JSX.Element {
                 title: 'Portföy',
                 headerShown: false,
                 tabBarShowLabel: true,
-                tabBarActiveTintColor: tabBarActiveTintColor,
+                tabBarActiveTintColor: Colors.light.tabBarActiveTintColor,
                 tabBarLabelStyle: styles.tabBarLabelStyle,
-                tabBarInactiveTintColor: tabBarInactiveTintColor,
+                tabBarInactiveTintColor: Colors.light.tabBarInactiveTintColor,
                 tabBarIcon: ({ color, size }) => <EntypoIcon name="wallet" size={size} color={color} />,
                 headerRight: () => (
                   <Pressable onPress={() => dispatch(showModal(true))}>
@@ -58,9 +58,9 @@ function App(): JSX.Element {
                 headerShown: false,
                 tabBarShowLabel: true,
                 title: 'Kurlar',
-                tabBarActiveTintColor: tabBarActiveTintColor,
+                tabBarActiveTintColor: Colors.light.tabBarActiveTintColor,
                 tabBarLabelStyle: styles.tabBarLabelStyle,
-                tabBarInactiveTintColor: tabBarInactiveTintColor,
+                tabBarInactiveTintColor: Colors.light.tabBarInactiveTintColor,
                 tabBarIcon: ({ color, size }) => <FontAwesomeIcon name="exchange" size={size} color={color} />
               }} />
           </Tab.Navigator>

@@ -1,34 +1,26 @@
 import { StyleSheet } from 'react-native';
-const backButtonWidth = 75;
-export const openWidth = backButtonWidth * 2;
-const fontSize = 16;
-const assetFullNameFontSize = 13;
-const borderRadius = 20;
-const padding = 18;
-
-export const colorWhite = '#ffffff';
-export const colorBlack = '#000000';
-export const colorHighlight = '#e5e5e5';
-export const tabBarActiveTintColor = '#1cb96a';
-export const tabBarInactiveTintColor = 'gray';
-const colorDanger = '#e91e63';
-const colorInfo = '#2196f3';
-const colorWarning = '#ffeb3b';
-const colorSuccess = '#4caf50';
-const colorDangerText = '#660000';
-const colorInfoText = '#0000cc';
-const colorWarningText = '#8e5500';
-const colorSuccessText = '#004c45';
-const colorGray = "#383a50";
-const fontFamily = "MarkPro";
+import Colors from '../constants/Colors';
+import Dimensions from '../constants/Dimensions';
+export const fontFamily = "MarkPro";
 
 export const styles = StyleSheet.create({
+    darkbg:{
+      backgroundColor: Colors.dark.background
+    },
+    lightbg:{
+      backgroundColor: Colors.light.background
+    },
+    assetItemLight:{
+      backgroundColor: Colors.light.assetItem,
+    },
+    assetItemDark:{
+      backgroundColor: Colors.dark.assetItem,
+    },
     mainContainer: {
       flex: 1,
-      marginBottom: 5
     },
     linearGradient: {
-      borderRadius: borderRadius,
+      borderRadius: Dimensions.borderRadius,
       paddingTop: 20,
       paddingRight: 20,
       paddingLeft: 20,
@@ -38,6 +30,14 @@ export const styles = StyleSheet.create({
       marginLeft: 10,
       marginBottom: 5
     },
+    linearGradientDark:
+    {
+      borderColor: Colors.light.balanceBackgroundPrimary,
+      borderWidth: 1
+    },
+    linearGradientLight:{
+
+    },
     balanceMainContainer:{
       backgroundColor: "transparent",
       display: "flex",
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
       alignItems: "flex-start",
     },
     balanceTitle:{
-      color: colorWhite,
+      color: Colors.light.textSecondary,
       fontFamily: fontFamily,
       marginBottom: 10,
       fontSize: 13,
@@ -58,15 +58,14 @@ export const styles = StyleSheet.create({
       fontSize: 24,
       fontWeight: "800",
       fontFamily: fontFamily,
-      color: colorWhite
+      color: Colors.light.textSecondary
     },
     assetItem: {
       justifyContent: 'center',
-      padding: padding,
+      padding: Dimensions.padding,
       margin: 10,
-      backgroundColor: colorWhite,
       marginVertical: 5,
-      borderRadius: borderRadius
+      borderRadius: Dimensions.borderRadius
     },
     assetItemView:{
       display: "flex", 
@@ -77,22 +76,37 @@ export const styles = StyleSheet.create({
       flexGrow: 1
     },
     assetSymbol: {
-      color: colorGray,
-      fontSize: fontSize,
+      fontSize: Dimensions.fontSize,
       fontFamily: fontFamily,
       fontWeight: "500",
       marginTop: 3,
     },
+    assetSymbolDark:{
+      color: Colors.dark.text,
+    },
+    assetSymbolLight:{
+      color: Colors.light.text,
+    },
     assetFullName: {
-      fontSize: assetFullNameFontSize,
-      color: "gray",
+      fontSize: Dimensions.assetFullNameFontSize,
       fontFamily: fontFamily
     },
+    assetFullNameDark:{
+      color: Colors.dark.assetFullName
+    },
+    assetFullNameLight:{
+      color: Colors.light.assetFullName
+    },
     assetValue: {
-      color: colorGray,
-      fontSize: fontSize,
+      fontSize: Dimensions.fontSize,
       fontFamily: fontFamily,
       fontWeight: "500"
+    },
+    assetValueDark:{
+      color: Colors.dark.text,
+    },
+    assetValueLight:{
+      color: Colors.light.text,
     },
     actionContainer: {
       flex: 1,
@@ -100,10 +114,10 @@ export const styles = StyleSheet.create({
       justifyContent: 'space-between',
       backgroundColor: "transparent",
       flexDirection: 'row',
-      paddingHorizontal: padding,
+      paddingHorizontal: Dimensions.padding,
       marginVertical: 5,
       margin: 10,
-      borderRadius: borderRadius
+      borderRadius: Dimensions.borderRadius
     },
     actionBtn: {
       alignItems: 'center',
@@ -111,18 +125,18 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       position: 'absolute',
       top: 0,
-      width: backButtonWidth,
-      borderRadius: borderRadius
+      width: Dimensions.backButtonWidth,
+      borderRadius: Dimensions.borderRadius
     },
     deleteBtn: {
-      backgroundColor: colorDanger,
+      backgroundColor: Colors.colorDanger,
       right: 0,
-      borderRadius: borderRadius
+      borderRadius: Dimensions.borderRadius
     },
     editBtn: {
-      backgroundColor: colorInfo,
-      right: backButtonWidth,
-      borderRadius: borderRadius
+      backgroundColor: Colors.colorEdit,
+      right: Dimensions.backButtonWidth,
+      borderRadius: Dimensions.borderRadius
     },
     shadow: {
       shadowColor: "#000",
@@ -137,13 +151,21 @@ export const styles = StyleSheet.create({
     input: {
         height: 45,
         marginBottom: 10,
-        backgroundColor: colorWhite,
-        color: colorBlack,
+        color: Colors.light.inputFontColor,
         padding: 8,
         fontSize: 16,
         borderRadius: 20,
         fontFamily: fontFamily,
         fontWeight: "500"
+    },
+    inputDark:{
+      backgroundColor: Colors.dark.assetItem,
+      borderColor: Colors.light.balanceBackgroundPrimary,
+      borderWidth: 1,
+      color: Colors.dark.text
+    },
+    inputLight:{
+      backgroundColor: Colors.light.textSecondary,
     },
     button: {
         alignItems: 'center',
@@ -154,13 +176,18 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        color: colorWhite,
+        color: Colors.light.textSecondary,
         fontFamily: fontFamily,
         fontWeight: "500"
     },
     modalContainer: {
-        backgroundColor: "#e0e0e0", 
         marginTop: 400
+    },
+    modalContainerDark:{
+      backgroundColor: Colors.dark.background
+    },
+    modalContainerLight:{
+      backgroundColor: Colors.light.background
     },
     modalMainView: {
         display: "flex", 
@@ -189,20 +216,26 @@ export const styles = StyleSheet.create({
       paddingTop: 10,
       height: 80
     },
+    tabBarStyleDark:{
+      backgroundColor: Colors.dark.background
+    },
+    tabBarStyleLight:{
+      backgroundColor: Colors.light.background
+    },
     tabBarLabelStyle:{
       fontFamily: fontFamily, 
       fontWeight: "700"
     },
     successMessageTitle: {
       fontFamily: fontFamily, 
-      fontSize: fontSize,
+      fontSize: Dimensions.fontSize,
       fontWeight: "500"
     },
     currencyMain:{
       padding: 18,
-      borderRadius: borderRadius,
+      borderRadius: Dimensions.borderRadius,
       margin: 10,
-      backgroundColor: colorWhite,
+      backgroundColor: Colors.light.textSecondary,
       marginVertical: 5,
     },
     currencyRenderItem: {
@@ -226,19 +259,19 @@ export const styles = StyleSheet.create({
       alignItems:"flex-end"
     },
     currencySymbol: {
-      color: colorGray,
+      color: Colors.light.text,
       fontSize: 15,
       fontFamily: fontFamily,
       fontWeight: "500"
     },
     currencyName: {
-      fontSize: assetFullNameFontSize,
+      fontSize: Dimensions.assetFullNameFontSize,
       color: "gray",
       fontFamily: fontFamily,
       marginBottom: 3
     },
     currencyValueTitle:{
-      fontSize: assetFullNameFontSize,
+      fontSize: Dimensions.assetFullNameFontSize,
       color: "gray",
       fontFamily: fontFamily,
       marginBottom: 3,
@@ -247,11 +280,20 @@ export const styles = StyleSheet.create({
       fontSize: 15,
       fontFamily: fontFamily,
       fontWeight: "500",
-      color: colorGray
+      color: Colors.light.text
     },
     currencyLinearGradient: {
       display: "flex",
       height: "10%",
       marginBottom: 5
+    },
+    assetPickerDark:{
+      backgroundColor: Colors.dark.assetItem,
+      borderColor: Colors.light.balanceBackgroundPrimary,
+      borderWidth: 1,
+      color: Colors.dark.text
+    },
+    assetPickerLight:{
+
     }
   });
