@@ -22,8 +22,8 @@ const renderItem = (item:any) => {
       <View style={[styles.currencyMain, styles.shadow]}>
       <View style={[styles.currencyRenderItem]}>
         <View style={styles.currencyNameView}>
-          <Text style={styles.currencySymbol}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.name}</Text>
-          <Text style={styles.currencyName}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.symbol}</Text>
+          <Text style={styles.currencyName}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.name}</Text>
+          <Text style={styles.currencySymbol}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.symbol}</Text>
         </View>
         <View style={styles.currencyValueViewMain}>
         <View style={styles.currencyValueView}>

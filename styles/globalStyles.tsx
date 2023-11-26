@@ -28,15 +28,20 @@ export const styles = StyleSheet.create({
       marginBottom: 5
     },
     linearGradient: {
-      flex: 1,
-      position: "absolute",
-      height: "24%",
-      top: 0,
-      width: "100%",
-      // borderRadius: borderRadius
+      // flex: 1,
+      // position: "absolute",
+      // height: "24%",
+      // top: 0,
+      // width: "100%",
+      borderRadius: borderRadius,
+      padding: 20,
+      marginTop: 10,
+      marginRight: 10,
+      marginLeft: 10,
+      marginBottom: 5
     },
     balanceMainContainer:{
-      padding: 10,
+      // padding: 10,
       backgroundColor: "transparent",
       display: "flex",
       flexDirection: "column",
@@ -86,11 +91,11 @@ export const styles = StyleSheet.create({
       color: colorGray,
       fontSize: fontSize,
       fontFamily: fontFamily,
-      fontWeight: "500"
+      fontWeight: "500",
+      marginTop: 3,
     },
     assetFullName: {
       fontSize: assetFullNameFontSize,
-      marginTop: 5,
       color: "gray",
       fontFamily: fontFamily
     },
@@ -229,13 +234,13 @@ export const styles = StyleSheet.create({
       flex: 1, 
       alignItems:"flex-end"
     },
-    currencyName: {
+    currencySymbol: {
       color: colorGray,
       fontSize: 15,
       fontFamily: fontFamily,
       fontWeight: "500"
     },
-    currencySymbol: {
+    currencyName: {
       fontSize: assetFullNameFontSize,
       color: "gray",
       fontFamily: fontFamily,

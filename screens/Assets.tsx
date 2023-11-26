@@ -194,8 +194,8 @@ const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
       onPress={() => {}}>
       <View style={styles.assetItemView}>
         <View style={styles.assetItemNameView}>
-          <Text style={styles.assetSymbol}>{item.Name}</Text>
-          <Text style={styles.assetFullName}>{item.Symbol}</Text>
+          <Text style={styles.assetFullName}>{item.Name}</Text>
+          <Text style={styles.assetSymbol}>{item.Symbol}</Text>
         </View>
         <View>
           <Text style={styles.assetValue}>{item.Amount}</Text>
@@ -226,28 +226,28 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
     <>
     <SafeAreaView style={styles.mainContainer}>
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#28ac49', "#1cb96a"]} style={styles.linearGradient}>
-        </LinearGradient>
-      <View style={[styles.balanceMainContainer]}>
-      <View style={styles.addButtonView}>
-          <Pressable onPress={() => dispatch(showModal(true))}>
-                    {({ pressed }) => (
-                      <Feather
-                        name="plus-circle"
-                        size={25}
-                        color={colorWhite}
-                        style={{ opacity: pressed ? 0.5 : 1 }}
-                      />
-                    )}
-              </Pressable>
-        </View>
-          <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
-          <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
-          <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 
-          {
-            if(value)
-            setAssetTypeId(value)
-          }} />
-      </View>
+          <View style={[styles.balanceMainContainer]}>
+          <View style={styles.addButtonView}>
+              <Pressable onPress={() => dispatch(showModal(true))}>
+                        {({ pressed }) => (
+                          <Feather
+                            name="plus-circle"
+                            size={25}
+                            color={colorWhite}
+                            style={{ opacity: pressed ? 0.5 : 1 }}
+                          />
+                        )}
+                  </Pressable>
+            </View>
+              <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
+              <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+              <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 
+              {
+                if(value)
+                setAssetTypeId(value)
+              }} />
+          </View>
+      </LinearGradient>
       <SwipeListView 
         data={assets}
         renderItem={renderItem}
