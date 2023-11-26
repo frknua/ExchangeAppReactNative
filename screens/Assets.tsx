@@ -166,10 +166,14 @@ const amountFormat = (value:number) => {
 }
 
 let assetPickerParam = {
+  containerStyle:{
+    justifyContent: "flex-start"
+  },
   style: {
       backgroundColor: "transparent",
       color: "#fff",
-      fontWeight: "700"
+      fontWeight: "700",
+      paddingLeft: 0
   },
   icon:{
     color: "#fff",
@@ -227,7 +231,16 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
     <SafeAreaView style={styles.mainContainer}>
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={['#28ac49', "#1cb96a"]} style={styles.linearGradient}>
           <View style={[styles.balanceMainContainer]}>
-          <View style={styles.addButtonView}>
+            <View style={styles.balanceContainer}>
+                <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
+                <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+                <AssetPicker containerStyle={assetPickerParam.containerStyle} style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 
+                {
+                  if(value)
+                  setAssetTypeId(value)
+                }} />
+            </View>
+            <View style={styles.addButtonView}>
               <Pressable onPress={() => dispatch(showModal(true))}>
                         {({ pressed }) => (
                           <Feather
@@ -239,13 +252,6 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
                         )}
                   </Pressable>
             </View>
-              <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
-              <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
-              <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 
-              {
-                if(value)
-                setAssetTypeId(value)
-              }} />
           </View>
       </LinearGradient>
       <SwipeListView 

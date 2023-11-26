@@ -28,28 +28,21 @@ export const styles = StyleSheet.create({
       marginBottom: 5
     },
     linearGradient: {
-      // flex: 1,
-      // position: "absolute",
-      // height: "24%",
-      // top: 0,
-      // width: "100%",
       borderRadius: borderRadius,
-      padding: 20,
+      paddingTop: 20,
+      paddingRight: 20,
+      paddingLeft: 20,
+      paddingBottom: 10,
       marginTop: 10,
       marginRight: 10,
       marginLeft: 10,
       marginBottom: 5
     },
     balanceMainContainer:{
-      // padding: 10,
       backgroundColor: "transparent",
       display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
-    },
-    balanceTitleContainer: {
-      marginLeft: 10,
-      marginBottom: 10
+      flexDirection: "row",
+      alignItems: "flex-start",
     },
     balanceTitle:{
       color: colorWhite,
@@ -59,11 +52,7 @@ export const styles = StyleSheet.create({
       fontWeight: "700"
     },
     balanceContainer: {
-      margin: 10, 
-      display: "flex", 
-      flexDirection: "row", 
-      justifyContent: "space-between", 
-      alignItems: "center"
+      flex: 1
     },
     balanceValue: {
       fontSize: 24,
@@ -183,8 +172,10 @@ export const styles = StyleSheet.create({
 
     },
     addButtonView: {
-      position:"absolute", 
-      right: 15
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "flex-end",
+      justifyContent: "flex-end"
     },
     absolute: {
       position: "absolute",

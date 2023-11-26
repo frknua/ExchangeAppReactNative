@@ -32,18 +32,19 @@ export default function AssetPicker (props:any) {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
+                ...props.containerStyle
               },
               inputAndroidContainer: {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
+                ...props.containerStyle
               },
               inputIOS: {
                 color: 'black',
                 fontSize: 16,
                 padding: 10,
-                paddingVertical: 12,
                 backgroundColor: "#fff",
                 borderRadius: 20,
                 // minWidth: 230,
@@ -55,7 +56,6 @@ export default function AssetPicker (props:any) {
                 color: 'black',
                 fontSize: 16,
                 padding: 10,
-                paddingVertical: 12,
                 backgroundColor: "#fff",
                 borderRadius: 20,
                 // minWidth: 230,
