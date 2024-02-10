@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { assetTypes } from '../constants/AssetTypes';
 import Octicons from 'react-native-vector-icons/Octicons';
-import { styles, fontFamily} from '../styles/globalStyles';
+import {fontFamily} from '../styles/globalStyles';
 import Dimensions from '../constants/Dimensions';
+import Colors from '../constants/Colors';
 
 export default function AssetPicker (props:any) {
   const [assetTypeList, setAssetTypeList] = useState<any>([]);
@@ -24,7 +25,7 @@ export default function AssetPicker (props:any) {
     <RNPickerSelect
             style={{
               placeholder: {
-                color: 'gray',
+                color: props.isDarkMode ? Colors.dark.assetFullName : Colors.light.assetFullName,
                 fontSize: Dimensions.fontSize,
                 fontFamily: fontFamily,
               },

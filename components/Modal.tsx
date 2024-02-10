@@ -42,6 +42,7 @@ export default function Modal(props: any) {
                         onChangeText={(t) => setAmount(t)}
                         placeholder="Miktar Giriniz"
                         keyboardType="numeric"
+                        placeholderTextColor={props.isDarkMode ? Colors.dark.assetFullName : Colors.light.assetFullName}
                     />
                     {!props.isEditMode && <AssetPicker style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: any) => setAssetTypeId(value)} isDarkMode={props.isDarkMode}></AssetPicker>}
                     <TouchableOpacity style={[styles.button, styles.shadow]}

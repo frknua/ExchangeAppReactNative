@@ -214,12 +214,12 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
       <TouchableOpacity
         style={[styles.actionBtn, styles.editBtn]}
         onPress={() => handleEdit(rowData, rowMap)}>
-        <FontAwesomeIcon size={28} style={{ color: Colors.light.textSecondary }} name='edit' />
+        <FontAwesomeIcon size={Dimensions.hiddenActionIconSize} style={{ color: Colors.light.textSecondary }} name='edit' />
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.actionBtn, styles.deleteBtn]}
         onPress={() => handleDelete(rowData, rowMap)}>
-        <FontAwesomeIcon size={28} style={{ color: Colors.light.textSecondary }} name='trash' />
+        <FontAwesomeIcon size={Dimensions.hiddenActionIconSize} style={{ color: Colors.light.textSecondary }} name='trash' />
       </TouchableOpacity>
     </View>
   );
@@ -265,7 +265,6 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         stopRightSwipe={-Dimensions.openWidth}
         disableRightSwipe={true}
         style={styles.swipeList}
-        onRowOpen={() => console.log("row opened!")}
       />
     </SafeAreaView>
     {openModal && <BlurView style={styles.absolute} blurType="light" blurAmount={3} />}
@@ -279,6 +278,8 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         }
         }
         onSave={async (assetTypeId: number, amount: number) => {
+          if(amount != 0)
+          {
           if (assetTypeId) {
             await addAsset(uniqueId, assetTypeId, amount, (added:Asset) =>{
                 setIsEditing(false);
@@ -289,13 +290,14 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
             
           }
           else {
-            await updateAsset(uniqueId, editingAssetId, amount, (updated:Asset) => {
-              updateStateAsset(editingAssetId, amount);
-              setIsEditing(false);
+              await updateAsset(uniqueId, editingAssetId, amount, (updated:Asset) => {
+                updateStateAsset(editingAssetId, amount);
+                setIsEditing(false);
                 setRefreshing(false);
                 calculateTotal();
                 showInfoMessage("Güncelleme işlemi başarılı");
-            });
+              });
+          }
           }
         }}
       />

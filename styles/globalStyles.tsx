@@ -121,22 +121,23 @@ export const styles = StyleSheet.create({
     },
     actionBtn: {
       alignItems: 'center',
-      bottom: 0,
+      bottom: 1,
       justifyContent: 'center',
       position: 'absolute',
-      top: 0,
+      top: 1,
       width: Dimensions.backButtonWidth,
       borderRadius: Dimensions.borderRadius
     },
     deleteBtn: {
       backgroundColor: Colors.colorDanger,
-      right: 0,
+      right: 1,
       borderRadius: Dimensions.borderRadius
     },
     editBtn: {
       backgroundColor: Colors.colorEdit,
       right: Dimensions.backButtonWidth,
-      borderRadius: Dimensions.borderRadius
+      borderRadius: Dimensions.borderRadius,
+      marginRight: 10
     },
     shadow: {
       shadowColor: "#000",
