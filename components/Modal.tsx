@@ -22,7 +22,8 @@ export default function Modal(props: any) {
 
     let assetPickerParam = {
         style: {
-            width: "100%"
+            width: "100%",
+            ...props.isDarkMode ? styles.assetPickerDark : styles.assetPickerLight
         },
         icon:{
             position: "absolute",

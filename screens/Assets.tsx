@@ -233,11 +233,13 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
             <View style={styles.balanceContainer}>
                 <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
                 <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
-                <AssetPicker containerStyle={assetPickerParam.containerStyle} style={assetPickerParam.style} icon={assetPickerParam.icon} onChange={(value: number) => 
-                {
-                  if(value)
-                  setAssetTypeId(value)
-                }} />
+                <AssetPicker containerStyle={assetPickerParam.containerStyle} style={assetPickerParam.style} icon={assetPickerParam.icon} isDarkMode={isDarkMode} 
+                  onChange={(value: number) => 
+                  {
+                    if(value)
+                    setAssetTypeId(value)
+                  }} 
+                />
             </View>
             <View style={styles.addButtonView}>
               <Pressable onPress={() => dispatch(showModal(true))}>
@@ -263,6 +265,7 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         stopRightSwipe={-Dimensions.openWidth}
         disableRightSwipe={true}
         style={styles.swipeList}
+        onRowOpen={() => console.log("row opened!")}
       />
     </SafeAreaView>
     {openModal && <BlurView style={styles.absolute} blurType="light" blurAmount={3} />}

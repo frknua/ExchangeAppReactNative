@@ -49,8 +49,7 @@ export default function AssetPicker (props:any) {
                 backgroundColor: "#fff",
                 borderRadius: Dimensions.borderRadius,
                 fontFamily: fontFamily,
-                ...props.style,
-                ...props.isDarkMode ? styles.assetPickerDark : styles.assetPickerLight
+                ...props.style
               },
               inputAndroid: {
                 color: 'black',
@@ -59,8 +58,7 @@ export default function AssetPicker (props:any) {
                 backgroundColor: "#fff",
                 borderRadius: Dimensions.borderRadius,
                 fontFamily: fontFamily,
-                ...props.style,
-                ...props.isDarkMode ? styles.assetPickerDark : styles.assetPickerLight
+                ...props.style
               },
               iconContainer: {
                 position: "relative",
