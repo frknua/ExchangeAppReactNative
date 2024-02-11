@@ -164,7 +164,7 @@ const amountFormat = (value:number) => {
   {
     const formatter = new Intl.NumberFormat(asset.cultureCode, {
       style: 'currency',
-      currency: asset.symbol
+      currency: asset.symbol.toUpperCase()
     });
     return formatter.format(value);  
   }

@@ -50,7 +50,7 @@ export const assetTypes = [
     type: assetTypeEnum.CURRENCY,
     name: "İsviçre Frangı",
     symbol: "Chf",
-    cultureCode: "fr-CH"
+    cultureCode: "de-CF"
 },
 {
     key: assetTypeIdEnum.CAD,
