@@ -22,7 +22,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addAsset, getAssets, deleteAsset, updateAsset, unsub } from '../services/AssetService';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import { assetTypes, assetTypeIdEnum } from '../constants/AssetTypes';
+import { assetTypes, assetTypeIdEnum, assetTypeEnum } from '../constants/AssetTypes';
 import { Currency } from '../types/Currency';
 import { styles } from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
@@ -159,9 +159,21 @@ const onRefresh = () => {
 };
 
 const amountFormat = (value:number) => {
-  let stringValue = value.toString();
-  let index = stringValue.indexOf(".");
-  return index != -1 ? stringValue.substring(0,index+3) : stringValue + ".00";
+  let asset = assetTypes.filter(i=>i.key == assetTypeId)[0];
+  if(asset?.type == assetTypeEnum.CURRENCY)
+  {
+    const formatter = new Intl.NumberFormat(asset.cultureCode, {
+      style: 'currency',
+      currency: asset.symbol
+    });
+    return formatter.format(value);  
+  }
+  else
+  {
+    let stringValue = value.toString();
+    let index = stringValue.indexOf(".");
+    return index != -1 ? stringValue.substring(0,index+5).concat(" ", asset.symbol) : stringValue + "";
+  }
 }
 
 let assetPickerParam = {
@@ -198,7 +210,7 @@ const renderItem = ({ item, index }: ListRenderItemInfo<Asset>) => {
       <View style={styles.assetItemView}>
         <View style={styles.assetItemNameView}>
           <Text style={[styles.assetFullName, isDarkMode ? styles.assetFullNameDark : styles.assetFullNameLight]}>{item.Name}</Text>
-          <Text style={[styles.assetSymbol, isDarkMode ? styles.assetSymbolDark : styles.assetSymbolLight]}>{item.Symbol}</Text>
+          <Text style={[styles.assetSymbol, isDarkMode ? styles.assetSymbolDark : styles.assetSymbolLight]}>{item.Symbol.toUpperCase()}</Text>
         </View>
         <View>
           <Text style={[styles.assetValue, isDarkMode ? styles.assetValueDark : styles.assetValueLight]}>{item.Amount}</Text>
@@ -232,7 +244,7 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
           <View style={[styles.balanceMainContainer]}>
             <View style={styles.balanceContainer}>
                 <Text style={styles.balanceTitle}>Toplam Bakiyeniz</Text>
-                <Text style={styles.balanceValue}>{amountFormat(total)} {assetTypes.filter(i=>i.key == assetTypeId)[0]?.symbol}</Text>
+                <Text style={styles.balanceValue}>{amountFormat(total)}</Text>
                 <AssetPicker containerStyle={assetPickerParam.containerStyle} style={assetPickerParam.style} icon={assetPickerParam.icon} isDarkMode={isDarkMode} 
                   onChange={(value: number) => 
                   {
@@ -287,7 +299,6 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
                   calculateTotal();
                   showInfoMessage("Ekleme işlemi başarılı");
             });
-            
           }
           else {
               await updateAsset(uniqueId, editingAssetId, amount, (updated:Asset) => {

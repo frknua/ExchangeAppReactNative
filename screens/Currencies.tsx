@@ -23,7 +23,7 @@ const renderItem = (item:any) => {
       <View style={[styles.currencyRenderItem]}>
         <View style={styles.currencyNameView}>
           <Text style={[styles.currencyName, isDarkMode ? styles.assetFullNameDark : styles.assetFullNameLight]}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.name}</Text>
-          <Text style={[styles.currencySymbol, isDarkMode ? styles.assetSymbolDark : styles.assetSymbolLight]}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.symbol}</Text>
+          <Text style={[styles.currencySymbol, isDarkMode ? styles.assetSymbolDark : styles.assetSymbolLight]}>{assetTypes.filter(i=>i.key == item.item.assetTypeId)[0]?.symbol.toUpperCase()}</Text>
         </View>
         <View style={styles.currencyValueViewMain}>
         <View style={styles.currencyValueView}>

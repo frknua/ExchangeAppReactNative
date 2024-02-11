@@ -1,3 +1,7 @@
+export const assetTypeEnum = {
+    CURRENCY: 1,
+    GOLD: 2
+}
 export const assetTypeIdEnum = {
     TRY: 1,
     USD: 2,
@@ -13,64 +17,88 @@ export const assetTypeIdEnum = {
     CUMHURIYET: 12
 }
 export const assetTypes = [
-    {
-        key: assetTypeIdEnum.TRY,
-        name: "Türk Lirası",
-        symbol: "TRY"
-    },
-    {
-        key: assetTypeIdEnum.USD,
-        name: "Amerikan Doları",
-        symbol: "USD"
-    },
-    {
-        key: assetTypeIdEnum.EUR,
-        name: "Euro",
-        symbol: "EUR"
-    },
-    {
-        key: assetTypeIdEnum.GBP,
-        name: "Sterlin",
-        symbol: "GBP"
-    },
-    {
-        key: assetTypeIdEnum.CHF,
-        name: "İsviçre Frangı",
-        symbol: "CHF"
-    },
-    {
-        key: assetTypeIdEnum.CAD,
-        name: "Kanada Doları",
-        symbol: "CAD"
-    },
-    {
-        key: assetTypeIdEnum.AUD,
-        name: "Avustralya Doları",
-        symbol: "AUD"
-    },
-    {
-        key: assetTypeIdEnum.GRAM,
-        name: "Gram Altın",
-        symbol: "GRAM"
-    },
-    {
-        key: assetTypeIdEnum.CEYREK,
-        name: "Çeyrek Altın",
-        symbol: "ÇEYREK"
-    },
-    {
-        key: assetTypeIdEnum.YARIM,
-        name: "Yarım Altın",
-        symbol: "YARIM"
-    },
-    {
-        key: assetTypeIdEnum.TAM,
-        name: "Tam Altın",
-        symbol: "TAM"
-    },
-    {
-        key: assetTypeIdEnum.CUMHURIYET,
-        name: "Cumhuriyet Altını",
-        symbol: "CUMHURİYET"
-    }
+{
+    key: assetTypeIdEnum.TRY,
+    type: assetTypeEnum.CURRENCY,
+    name: "Türk Lirası",
+    symbol: "Try",
+    cultureCode: "tr-TR"
+},
+{
+    key: assetTypeIdEnum.USD,
+    type: assetTypeEnum.CURRENCY,
+    name: "Amerikan Doları",
+    symbol: "Usd",
+    cultureCode: "en-US"
+},
+{
+    key: assetTypeIdEnum.EUR,
+    type: assetTypeEnum.CURRENCY,
+    name: "Euro",
+    symbol: "Eur",
+    cultureCode: "de-DE"
+},
+{
+    key: assetTypeIdEnum.GBP,
+    type: assetTypeEnum.CURRENCY,
+    name: "Sterlin",
+    symbol: "Gbp",
+    cultureCode: "en-GB"
+},
+{
+    key: assetTypeIdEnum.CHF,
+    type: assetTypeEnum.CURRENCY,
+    name: "İsviçre Frangı",
+    symbol: "Chf",
+    cultureCode: "fr-CH"
+},
+{
+    key: assetTypeIdEnum.CAD,
+    type: assetTypeEnum.CURRENCY,
+    name: "Kanada Doları",
+    symbol: "Cad",
+    cultureCode: "en-CA"
+},
+{
+    key: assetTypeIdEnum.AUD,
+    type: assetTypeEnum.CURRENCY,
+    name: "Avustralya Doları",
+    symbol: "Aud",
+    cultureCode: "en-AU"
+},
+{
+    key: assetTypeIdEnum.GRAM,
+    type: assetTypeEnum.GOLD,
+    name: "Gram Altın",
+    symbol: "Gram",
+    cultureCode: ""
+},
+{
+    key: assetTypeIdEnum.CEYREK,
+    type: assetTypeEnum.GOLD,
+    name: "Çeyrek Altın",
+    symbol: "Çeyrek",
+    cultureCode: ""
+},
+{
+    key: assetTypeIdEnum.YARIM,
+    type: assetTypeEnum.GOLD,
+    name: "Yarım Altın",
+    symbol: "Yarım",
+    cultureCode: ""
+},
+{
+    key: assetTypeIdEnum.TAM,
+    type: assetTypeEnum.GOLD,
+    name: "Tam Altın",
+    symbol: "Tam",
+    cultureCode: ""
+},
+{
+    key: assetTypeIdEnum.CUMHURIYET,
+    type: assetTypeEnum.GOLD,
+    name: "Cumhuriyet Altını",
+    symbol: "Cumhuriyet",
+    cultureCode: ""
+}
 ];
