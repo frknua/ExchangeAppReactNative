@@ -24,6 +24,8 @@ export default function AssetPicker (props:any) {
   return (
     <RNPickerSelect
             style={{
+              chevronUp: { display: "none" },
+              chevronDown: { display: "none" },
               placeholder: {
                 color: props.isDarkMode ? Colors.dark.assetFullName : Colors.light.assetFullName,
                 fontSize: Dimensions.fontSize,
