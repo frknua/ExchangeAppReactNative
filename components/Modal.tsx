@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import AssetPicker from './AssetPicker';
 import { Portal } from 'react-native-portalize';
@@ -11,7 +11,11 @@ export default function Modal(props: any) {
 
     useEffect(() => {
         if (props.show)
+        {
             modalizeRef.current?.open();
+            if(!props.isEditMode)
+            setAmount("0");
+        }
     }, [props.show]);
 
     const [amount, onChangeAmount] = useState('');
@@ -34,9 +38,11 @@ export default function Modal(props: any) {
     }
     return (
         <Portal>
-            <Modalize ref={modalizeRef} onClose={() => props.onClose()} modalStyle={[styles.modalContainer, props.isDarkMode ? styles.modalContainerDark : styles.modalContainerLight]}
-                avoidKeyboardLikeIOS={true}>
-                <View style={styles.modalMainView}>
+            <Modalize ref={modalizeRef} adjustToContentHeight onClose={() => props.onClose()} modalStyle={[styles.modalContainer, props.isDarkMode ? styles.modalContainerDark : styles.modalContainerLight]}
+                avoidKeyboardLikeIOS={true}
+                keyboardAvoidingBehavior={Platform.OS == "ios" ? "padding" : "height"}
+                keyboardAvoidingOffset={10}> 
+                <KeyboardAvoidingView style={styles.modalMainView}>
                     <TextInput
                         style={[styles.input, props.isDarkMode ? styles.inputDark : styles.inputLight]}
                         onChangeText={(t) => setAmount(t)}
@@ -53,7 +59,7 @@ export default function Modal(props: any) {
                         }}>
                         <Text style={styles.buttonText}>{props.isEditMode ? "Güncelle" : "Ekle"}</Text>
                     </TouchableOpacity>
-                </View>
+                </KeyboardAvoidingView>
             </Modalize>
         </Portal>
     );

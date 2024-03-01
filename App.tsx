@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Pressable, useColorScheme, Alert } from 'react-native';
+import { Pressable, useColorScheme, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -28,7 +28,7 @@ function App(): JSX.Element {
         <Host>
           <Tab.Navigator
             screenOptions={{
-              tabBarStyle: [styles.tabBarStyle, isDarkMode ? styles.tabBarStyleDark : styles.tabBarStyleLight],
+              tabBarStyle: [Platform.OS == "ios" ? styles.tabBarStyleIOS : styles.tabBarStyleAndroid, isDarkMode ? styles.tabBarStyleDark : styles.tabBarStyleLight],
             }}
           >
             <Tab.Screen name="Portföy" component={Assets}

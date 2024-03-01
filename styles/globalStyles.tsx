@@ -182,10 +182,13 @@ export const styles = StyleSheet.create({
         fontWeight: "500"
     },
     modalContainer: {
-        marginTop: 400
+        // marginTop: 400
+        // display: "flex",
+        // flexDirection: "row",
+        // alignItems: "flex-end",
     },
     modalContainerDark:{
-      backgroundColor: Colors.dark.background
+      backgroundColor: Colors.dark.assetItem
     },
     modalContainerLight:{
       backgroundColor: Colors.light.background
@@ -212,7 +215,11 @@ export const styles = StyleSheet.create({
       bottom: 0,
       right: 0
     },
-    tabBarStyle: {
+    tabBarStyleAndroid: {
+      paddingBottom: 5,
+      paddingTop: 5
+    },
+    tabBarStyleIOS:{
       paddingBottom: 20,
       paddingTop: 10,
       height: 80
