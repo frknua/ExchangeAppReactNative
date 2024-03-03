@@ -194,10 +194,10 @@ export const styles = StyleSheet.create({
       backgroundColor: Colors.light.background
     },
     modalMainView: {
-        display: "flex", 
-        flexDirection: "column", 
+        // display: "flex", 
+        // flexDirection: "column", 
         margin: 15,
-        marginTop: 20
+        // marginTop: 20,
     },
     swipeList: {
 
