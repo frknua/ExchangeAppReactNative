@@ -38,10 +38,13 @@ export default function Modal(props: any) {
     }
     return (
         <Portal>
-            <Modalize ref={modalizeRef} adjustToContentHeight onClose={() => props.onClose()} modalStyle={[styles.modalContainer, props.isDarkMode ? styles.modalContainerDark : styles.modalContainerLight]}
-                avoidKeyboardLikeIOS={true}
+            <Modalize ref={modalizeRef} onClose={() => props.onClose()} modalStyle={[styles.modalContainer, props.isDarkMode ? styles.modalContainerDark : styles.modalContainerLight]}
+                // avoidKeyboardLikeIOS={true}
                 keyboardAvoidingBehavior={Platform.OS == "ios" ? "padding" : "height"}
-                keyboardAvoidingOffset={10}> 
+                keyboardAvoidingOffset={10}
+                avoidKeyboardLikeIOS={Platform.select({ ios: true, android: true })}
+                adjustToContentHeight={true}
+                > 
                 <KeyboardAvoidingView style={styles.modalMainView}>
                     <TextInput
                         style={[styles.input, props.isDarkMode ? styles.inputDark : styles.inputLight]}
