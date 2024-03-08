@@ -52,6 +52,7 @@ export default function AssetPicker (props:any) {
                 backgroundColor: "#fff",
                 borderRadius: Dimensions.borderRadius,
                 fontFamily: fontFamily,
+                height: 48,
                 ...props.style
               },
               inputAndroid: {
@@ -61,6 +62,7 @@ export default function AssetPicker (props:any) {
                 backgroundColor: "#fff",
                 borderRadius: Dimensions.borderRadius,
                 fontFamily: fontFamily,
+                height: 48,
                 ...props.style
               },
               iconContainer: {

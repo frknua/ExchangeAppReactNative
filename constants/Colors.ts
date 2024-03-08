@@ -49,7 +49,7 @@ export default {
     background: bgDark,
     tint: tintColorDark,
     highlight: colorHighlightDark,
-    inputFontColor: colorBlack,
+    inputFontColor: fontColorWhite,
     tabBarActiveTintColor: tabBarActiveTintColor,
     tabBarInactiveTintColor: tabBarInactiveTintColor,
     balanceBackgroundPrimary: greenPrimaryDark,

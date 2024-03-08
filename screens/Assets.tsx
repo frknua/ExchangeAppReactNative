@@ -44,6 +44,7 @@ const [assetTypeId, setAssetTypeId] = useState<number|null>(null);
 const [editingAssetId, setEditingAssetId] = useState('');
 const [total, setTotal] = useState(0);
 const dispatch = useDispatch();
+const accessibilityLanguage = "tr-TR";
 
 useEffect(() => {
   if(refreshing)
@@ -239,7 +240,12 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
 
   return (
     <>
-    <SafeAreaView style={[styles.mainContainer, isDarkMode ? styles.darkbg : styles.lightbg]}>
+    <SafeAreaView 
+    style={[styles.mainContainer, isDarkMode ? styles.darkbg : styles.lightbg]}
+    accessible={true}
+    accessibilityHint='Bu ekranda sahip olduğunuz varlıklar ve toplam bakiyeniz görüntüleniyor'
+    accessibilityLanguage={accessibilityLanguage}
+    >
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 1}} colors={isDarkMode ? [Colors.dark.balanceBackgroundPrimary, Colors.dark.balanceBackgroundSecondary] : [Colors.light.balanceBackgroundPrimary, Colors.light.balanceBackgroundSecondary]} style={[styles.linearGradient, styles.shadow, isDarkMode ? styles.linearGradientDark : styles.linearGradientLight]}>
           <View style={[styles.balanceMainContainer]}>
             <View style={styles.balanceContainer}>
@@ -258,7 +264,7 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
                         {({ pressed }) => (
                           <Feather
                             name="plus-circle"
-                            size={25}
+                            size={24}
                             color={Colors.light.textSecondary}
                             style={{ opacity: pressed ? 0.5 : 1 }}
                           />
@@ -290,25 +296,25 @@ const renderHiddenItem = (rowData: any, rowMap: any) => {
         }
         }
         onSave={async (assetTypeId: number, amount: number) => {
-          if(amount != 0)
+          if(amount >= 0 && !isNaN(amount))
           {
-          if (assetTypeId) {
-            await addAsset(uniqueId, assetTypeId, amount, (added:Asset) =>{
-                setIsEditing(false);
-                assets?.push(added);
-                  calculateTotal();
-                  showInfoMessage("Ekleme işlemi başarılı");
-            });
-          }
-          else {
-              await updateAsset(uniqueId, editingAssetId, amount, (updated:Asset) => {
-                updateStateAsset(editingAssetId, amount);
-                setIsEditing(false);
-                setRefreshing(false);
-                calculateTotal();
-                showInfoMessage("Güncelleme işlemi başarılı");
+            if (assetTypeId) {
+              await addAsset(uniqueId, assetTypeId, amount, (added:Asset) =>{
+                  setIsEditing(false);
+                  assets?.push(added);
+                    calculateTotal();
+                    showInfoMessage("Ekleme işlemi başarılı");
               });
-          }
+            }
+            else {
+                await updateAsset(uniqueId, editingAssetId, amount, (updated:Asset) => {
+                  updateStateAsset(editingAssetId, amount);
+                  setIsEditing(false);
+                  setRefreshing(false);
+                  calculateTotal();
+                  showInfoMessage("Güncelleme işlemi başarılı");
+                });
+            }
           }
         }}
       />

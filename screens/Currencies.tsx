@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {SafeAreaView, useColorScheme, View, Text, FlatList} from 'react-native';
-import Colors from '../constants/Colors';
 import { unsub } from '../services/AssetService';
 import { Currency } from '../types/Currency';
 import { styles } from '../styles/globalStyles';
@@ -9,6 +8,7 @@ import { assetTypes } from '../constants/AssetTypes';
 export default function Currencies() {
 const isDarkMode = useColorScheme() === 'dark';
 const [currencies, setCurrencies] = useState<Currency>();
+const accessibilityLanguage = "tr-TR";
 
 useEffect(() => {
   unsub((data: Currency) => {
@@ -43,7 +43,11 @@ const renderItem = (item:any) => {
 
   return (
    <>
-    <SafeAreaView style={[styles.mainContainer, isDarkMode ? styles.darkbg : styles.lightbg]}>
+    <SafeAreaView 
+          style={[styles.mainContainer, isDarkMode ? styles.darkbg : styles.lightbg]}
+          accessible={true}
+          accessibilityHint='Bu ekranda güncel döviz ve altın kurları listeleniyor'
+          accessibilityLanguage={accessibilityLanguage}>
         <FlatList data={currencies?.data} renderItem={renderItem} />
     </SafeAreaView>
     </>

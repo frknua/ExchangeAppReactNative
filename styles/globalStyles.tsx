@@ -150,14 +150,13 @@ export const styles = StyleSheet.create({
       elevation: 1
     },
     input: {
-        height: 45,
+        height: 48,
         marginBottom: 10,
         color: Colors.light.inputFontColor,
         padding: 8,
         fontSize: 16,
         borderRadius: 20,
-        fontFamily: fontFamily,
-        fontWeight: "500"
+        fontFamily: fontFamily
     },
     inputDark:{
       backgroundColor: Colors.dark.assetItem,
@@ -173,7 +172,8 @@ export const styles = StyleSheet.create({
         backgroundColor: "#1cb96a",
         padding: 12,
         borderRadius: 20,
-        marginTop: 10
+        marginTop: 10,
+        height: 48
     },
     buttonText: {
         fontSize: 16,
@@ -182,10 +182,8 @@ export const styles = StyleSheet.create({
         fontWeight: "500"
     },
     modalContainer: {
-        // marginTop: 400
-        // display: "flex",
-        // flexDirection: "row",
-        // alignItems: "flex-end",
+        marginTop: 80,
+        flex: 1
     },
     modalContainerDark:{
       backgroundColor: Colors.dark.assetItem
@@ -194,10 +192,7 @@ export const styles = StyleSheet.create({
       backgroundColor: Colors.light.background
     },
     modalMainView: {
-        // display: "flex", 
-        // flexDirection: "column", 
-        margin: 15,
-        // marginTop: 20,
+        margin: 15
     },
     swipeList: {
 
@@ -216,8 +211,9 @@ export const styles = StyleSheet.create({
       right: 0
     },
     tabBarStyleAndroid: {
-      paddingBottom: 5,
-      paddingTop: 5
+      paddingBottom: 10,
+      paddingTop: 5,
+      height: 60
     },
     tabBarStyleIOS:{
       paddingBottom: 20,
