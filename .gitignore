@@ -4,3 +4,4 @@ vendor/
 ios/
 android/
 yarn-error.log
+firebase/
