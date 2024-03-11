@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, db, getDoc, addDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, query, orderBy, onSnapshot } from "../firebase/Config";
+import { collection, doc, db, getDoc, addDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, query, orderBy, onSnapshot } from "../firebase/ConfigSecret"; // Config.tsx should be configure and use
 import { Asset } from "../types/asset";
 import { Currency } from "../types/Currency";
 import { assetTypeIdEnum, assetTypes } from "../constants/AssetTypes";
